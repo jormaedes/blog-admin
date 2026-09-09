@@ -12,10 +12,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@layer base {
+  input {
+    @apply border rounded-md px-2 py-1;
+  }
+
+  button {
+    @apply bg-black rounded-md px-2 py-1 text-white cursor-pointer;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ededed;
   }
 }
 
