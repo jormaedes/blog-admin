@@ -23,7 +23,6 @@ export default function LoginPage() {
 			localStorage.setItem("token", data.token);
 			setUser(data.user);
 			
-			console.log(data);
 			router.push("/dashboard");
 		} catch (error) {
 			if (error instanceof Error) {
