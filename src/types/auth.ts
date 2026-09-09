@@ -1,7 +1,7 @@
 export interface User {
 	id: number;
-	firstname: string;
-	lastname: string;
+	firstName: string;
+	lastName: string;
 	username: string;
 	userType: string;
 }
@@ -12,10 +12,10 @@ export interface LoginResponse {
 }
 
 export interface UserState {
-  user: User | null;
-  isAuthLoading: boolean;
-  isAuthenticated: boolean;
-  setUser: (userData: User) => void;
-  logout: () => void;
-  restoreAuth: () => Promise<void>;
+	user: User | null;
+	isAuthLoading: boolean;
+	isAuthenticated: boolean;
+	setUser: (userData: User) => void;
+	logout: () => void;
+	restoreAuth: () => Promise<void>;
 }
