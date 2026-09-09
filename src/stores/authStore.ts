@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import type { UserState, User } from '@/types/auth'
 import { getToken, getCurrentUser } from '@/lib/api';
 
-const useAuthStore = create<UserState>((set) => ({
+const useAuthStore = create<UserState>((set, get) => ({
   user: null,
   isAuthenticated: false,
 
@@ -19,7 +19,7 @@ const useAuthStore = create<UserState>((set) => ({
       isAuthenticated: false,
     });
   },
-  
+
   restoreAuth: async () => {
     try {
       const token = getToken();
@@ -33,10 +33,7 @@ const useAuthStore = create<UserState>((set) => ({
         isAuthenticated: true,
       });
     } catch (error) {
-      set((state) => {
-        state.logout();
-        return state;
-      });
+      get().logout();
     }
   }
 }));
