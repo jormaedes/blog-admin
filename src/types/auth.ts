@@ -16,4 +16,5 @@ export interface UserState {
   isAuthenticated: boolean;
   setUser: (userData: User) => void;
   logout: () => void;
+  restoreAuth: () => Promise<void>;
 }
