@@ -1,4 +1,5 @@
 import type { LoginResponse, User } from "@/types/auth";
+import type { Post } from "@/types/post";
 
 const API_URL = "http://localhost:3300";
 
@@ -37,6 +38,21 @@ export async function getCurrentUser(token: string): Promise<User> {
 
   if (!response.ok) {
     throw new Error("Failed to get current user");
+  }
+
+  return response.json();
+}
+
+export async function getPosts(token: string): Promise<Post[]> {
+  const response = await fetch(`${API_URL}/posts`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to get all posts");
   }
 
   return response.json();
