@@ -6,13 +6,13 @@ const useUserStore = create<UserState>((set) => ({
   isAuthenticated: false,
 
   setUser: (userData: User) => set({
-	user: userData,
-	isAuthenticated: true,
+    user: userData,
+    isAuthenticated: true,
   }),
 
-  logout: () => set({ 
-    user: null, 
-    isAuthenticated: false 
+  logout: () => set({
+    user: null,
+    isAuthenticated: false
   }),
 }));
 
