@@ -1,44 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import useAuthStore from "@/stores/authStore";
 
 export default function Header() {
-	const router = useRouter();
+  const user = useAuthStore((state) => state.user);
 
-	const user = useAuthStore((state) => state.user);
-	const logout = useAuthStore((state) => state.logout);
+  return (
+    <header>
+      <div className="flex items-center justify-between py-2 mx-auto">
+        <Link href="/">Blog Admin</Link>
 
-	function handleLogout() {
-		logout();
-		router.replace("/login");
-	}
+        {user ? (
+          <Link href="/dashboard/profile">
+            <div className="flex items-center gap-2">
+              <div>
+                {user.firstName[0]}
+                {user.lastName[0]}
+              </div>
 
-	if (!user) {
-		return (
-			<header>
-				<div className="flex items-center justify-between py-2 container mx-auto">
-					<Link href="/">Blog Admin</Link>
-
-					<Link href="/login">Login</Link>
-				</div>
-			</header>
-		);
-	}
-
-	return (
-		<header>
-			<div className="flex items-center justify-between py-2 container mx-auto">
-				<Link href="/">Blog Admin</Link>
-
-				<h2> {user.firstName} {user.lastName}</h2>
-
-				<button onClick={handleLogout}>
-					Logout
-				</button>
-			</div>
-		</header>
-	);
+              <span>{user.username}</span>
+            </div>
+          </Link>
+        ) : (
+          <Link href="/login">Login</Link>
+        )}
+      </div>
+    </header>
+  );
 }

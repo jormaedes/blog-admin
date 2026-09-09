@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+
+import AuthGuard from "@/components/AuthGuard";
 import Sidebar from "@/components/Sidebar";
 
 interface DashboardLayoutProps {
@@ -9,12 +11,14 @@ export default function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
   return (
-    <div>
-      <Sidebar />
+    <AuthGuard>
+      <div>
+        <Sidebar />
 
-      <main>
-        {children}
-      </main>
-    </div>
+        <main>
+          {children}
+        </main>
+      </div>
+    </AuthGuard>
   );
 }
