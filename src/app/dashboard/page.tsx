@@ -1,8 +1,12 @@
-import useAuthStore from "@/stores/authStore"
+import AuthGuard from "@/components/AuthGuard";
 
-export default function Dashboard(){
-	const user = useAuthStore((state) => state.user);
-	return (
-		<h1>Olá, {user?.firstname}</h1>
-	)
+export default function DashboardPage() {
+  return (
+    <AuthGuard>
+      <main>
+        <h1>Dashboard</h1>
+        <p>Welcome to your dashboard.</p>
+      </main>
+    </AuthGuard>
+  );
 }
