@@ -1,21 +1,30 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
+
 import { login } from "@/lib/api";
+import useUserStore from "@/stores/authStore";
 
 export default function LoginPage() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
+	const setUser = useUserStore((state) => state.setUser);
+
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		try {
 			const data = await login(username, password);
-
-			console.log(data.token);
-			console.log(data.user);
+			
+			localStorage.setItem("token", data.token);
+			setUser(data.user);
+			
+			console.log(data);
 		} catch (error) {
-			console.error(error);
+			if (error instanceof Error) {
+				console.error(error.message);
+			}
 		}
 	}
 
