@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 import { login } from "@/lib/api";
 import useAuthStore from "@/stores/authStore";
@@ -12,6 +13,8 @@ export default function LoginPage() {
 
 	const setUser = useAuthStore((state) => state.setUser);
 
+	const router = useRouter();
+
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		try {
@@ -21,6 +24,7 @@ export default function LoginPage() {
 			setUser(data.user);
 			
 			console.log(data);
+			router.push("/dashboard");
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error.message);
