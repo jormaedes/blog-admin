@@ -13,6 +13,7 @@ export interface LoginResponse {
 
 export interface UserState {
   user: User | null;
+  isAuthLoading: boolean;
   isAuthenticated: boolean;
   setUser: (userData: User) => void;
   logout: () => void;

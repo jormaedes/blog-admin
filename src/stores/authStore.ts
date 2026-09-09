@@ -5,6 +5,7 @@ import { getToken, getCurrentUser } from '@/lib/api';
 const useAuthStore = create<UserState>((set, get) => ({
   user: null,
   isAuthenticated: false,
+  isAuthLoading: true,
 
   setUser: (userData: User) => set({
     user: userData,
@@ -34,6 +35,10 @@ const useAuthStore = create<UserState>((set, get) => ({
       });
     } catch {
       get().logout();
+    } finally {
+      set({
+        isAuthLoading: false
+      })
     }
   }
 }));
