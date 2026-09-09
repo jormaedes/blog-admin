@@ -3,7 +3,7 @@ export interface User {
 	firstname: string;
 	lastname: string;
 	username: string;
-	userType: "AUTHOR";
+	userType: string;
 }
 
 export interface LoginResponse {
