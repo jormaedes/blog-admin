@@ -10,3 +10,10 @@ export interface LoginResponse {
 	token: string;
 	user: User;
 }
+
+export interface UserState {
+  user: User | null;
+  isAuthenticated: boolean;
+  setUser: (userData: User) => void;
+  logout: () => void;
+}
