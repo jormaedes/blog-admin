@@ -11,7 +11,6 @@ export default function Header() {
 	const user = useAuthStore((state) => state.user);
 	const logout = useAuthStore((state) => state.logout);
 
-	console.log(user)
 	function handleLogout() {
 		logout();
 		router.replace("/login");
@@ -34,9 +33,7 @@ export default function Header() {
 			<div className="flex items-center justify-between py-2 container mx-auto">
 				<Link href="/">Blog Admin</Link>
 
-				<h2>
-					{user.firstName} {user.lastName}
-				</h2>
+				<h2> {user.firstName} {user.lastName}</h2>
 
 				<button onClick={handleLogout}>
 					Logout
