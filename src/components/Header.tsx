@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header>
       <div className="flex items-center justify-between py-2 mx-auto">
-        <Link href="/">Blog Admin</Link>
+        <Link href={user? '/dashboard': '/'}>Blog Admin</Link>
 
         {user ? (
           <Link href="/dashboard/profile">
@@ -20,7 +20,7 @@ export default function Header() {
                 {user.lastName[0]}
               </div>
 
-              <span>{user.username}</span>
+              <span>@{user.username}</span>
             </div>
           </Link>
         ) : (

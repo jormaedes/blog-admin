@@ -16,7 +16,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside>
+    <aside className="w-64 flex flex-col">
       <nav>
         <ul>
           <li>
@@ -41,7 +41,7 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      <footer>
+      <footer className="mt-auto">
         <button type="button">
           Alterar tema
         </button>

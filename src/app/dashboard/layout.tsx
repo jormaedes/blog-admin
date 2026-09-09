@@ -12,10 +12,10 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   return (
     <AuthGuard>
-      <div>
+      <div className="flex flex-1">
         <Sidebar />
 
-        <main>
+        <main className="flex-1">
           {children}
         </main>
       </div>
