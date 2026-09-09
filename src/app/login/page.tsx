@@ -4,13 +4,13 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 
 import { login } from "@/lib/api";
-import useUserStore from "@/stores/authStore";
+import useAuthStore from "@/stores/authStore";
 
 export default function LoginPage() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
-	const setUser = useUserStore((state) => state.setUser);
+	const setUser = useAuthStore((state) => state.setUser);
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();

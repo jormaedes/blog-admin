@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import type { UserState, User } from '@/types/auth'
 
-const useUserStore = create<UserState>((set) => ({
+const useAuthStore = create<UserState>((set) => ({
   user: null,
   isAuthenticated: false,
 
@@ -16,4 +16,4 @@ const useUserStore = create<UserState>((set) => ({
   }),
 }));
 
-export default useUserStore
+export default useAuthStore
