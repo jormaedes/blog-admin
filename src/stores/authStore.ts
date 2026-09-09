@@ -32,7 +32,7 @@ const useAuthStore = create<UserState>((set, get) => ({
         user: payload,
         isAuthenticated: true,
       });
-    } catch (error) {
+    } catch {
       get().logout();
     }
   }
