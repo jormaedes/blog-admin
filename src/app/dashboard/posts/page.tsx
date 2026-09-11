@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { getPosts, getToken } from "@/lib/api";
+import { getPosts, getToken, deletePost } from "@/lib/api";
 import type { Post } from "@/types/post";
 import Link from "next/link";
 
@@ -11,8 +11,42 @@ export default function PostsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [isDeleting, setIsDeleting] = useState<number | null>(null);
+
   function formatDate(timestamp: string) {
     return new Date(timestamp).toLocaleDateString("pt-PT");
+  }
+
+  async function handleDelete(postId: number) {
+    const confirmed = window.confirm(
+      "Tens a certeza que queres apagar este post?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+    const token = getToken();
+
+    if (!token) {
+      setError("Authentication token not found");
+      return;
+    }
+
+    try {
+      setIsDeleting(postId);
+
+      await deletePost(String(postId), token);
+
+      setPosts((currentPosts) =>
+        currentPosts.filter((post) => post.id !== postId)
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    } finally {
+      setIsDeleting(null);
+    }
   }
 
   useEffect(() => {
@@ -72,8 +106,12 @@ export default function PostsPage() {
               {post.published ? "Despublicar" : "Publicar"}
             </button>
 
-            <button type="button">
-              Apagar
+            <button
+              type="button"
+              onClick={() => handleDelete(post.id)}
+              disabled={isDeleting === post.id}
+            >
+              {isDeleting === post.id ? "A apagar..." : "Apagar"}
             </button>
           </div>
         </article>
