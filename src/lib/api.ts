@@ -178,3 +178,17 @@ export async function updateUser(
 
   return response.json();
 }
+
+export async function getUsers(token: string): Promise<User[]> {
+  const response = await fetch(`${API_URL}/users`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to get users");
+  }
+
+  return response.json();
+}
