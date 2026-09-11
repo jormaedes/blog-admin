@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
+import { Editor } from "@tinymce/tinymce-react";
+
 import { getPost, getToken } from "@/lib/api";
 import type { Post } from "@/types/post";
 
@@ -74,11 +76,26 @@ export default function EditPostPage() {
         <div>
           <label htmlFor="content">Conteúdo</label>
 
-          <textarea
+          <Editor
+            apiKey='bonyjowkb1vp3xnp38zzgdi0z60j6djhppcw196jrszgik6i'
             id="content"
-            name="content"
             value={content}
-            onChange={(event) => setContent(event.target.value)}
+            onEditorChange={(newContent) => setContent(newContent)}
+            init={{
+              height: 500,
+              menubar: false,
+              plugins: [
+                "lists",
+                "link",
+                "image",
+                "table",
+                "code",
+              ],
+              toolbar:
+                "undo redo | blocks | bold italic | " +
+                "alignleft aligncenter alignright | " +
+                "bullist numlist | link image | code",
+            }}
           />
         </div>
 
