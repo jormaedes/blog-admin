@@ -91,3 +91,23 @@ export async function updatePost(postId: string, title: string, content: string,
 
   return response.json();
 }
+
+export async function togglePostPublished(postId: string, published: boolean, token: string): Promise<Post> {
+  const response = await fetch( `${API_URL}/posts/${postId}/publish`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        published,
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update post publication status");
+  }
+
+  return response.json();
+}
