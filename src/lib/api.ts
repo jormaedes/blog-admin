@@ -124,3 +124,24 @@ export async function deletePost(postId: string, token: string): Promise<void> {
     throw new Error("Failed to delete post");
   }
 }
+
+export async function createPost(title: string, content: string, published: boolean, token: string): Promise<Post> {
+  const response = await fetch(`${API_URL}/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title,
+      content,
+      published,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create post");
+  }
+
+  return response.json();
+}
