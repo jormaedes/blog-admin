@@ -93,16 +93,16 @@ export async function updatePost(postId: string, title: string, content: string,
 }
 
 export async function togglePostPublished(postId: string, published: boolean, token: string): Promise<Post> {
-  const response = await fetch( `${API_URL}/posts/${postId}/publish`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        published,
-      }),
-    }
+  const response = await fetch(`${API_URL}/posts/${postId}/publish`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      published,
+    }),
+  }
   );
 
   if (!response.ok) {
@@ -141,6 +141,26 @@ export async function createPost(title: string, content: string, published: bool
 
   if (!response.ok) {
     throw new Error("Failed to create post");
+  }
+
+  return response.json();
+}
+
+export async function updateUser(userId: number, firstName: string, lastName: string, token: string): Promise<User> {
+  const response = await fetch(`${API_URL}/users/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      firstname: firstName,
+      lastname: lastName,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update user");
   }
 
   return response.json();
