@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { getPosts, getToken, deletePost, togglePostPublished } from "@/lib/api";
+import useAuthStore from "@/stores/authStore";
 import type { Post } from "@/types/post";
 import Link from "next/link";
 
@@ -13,6 +14,8 @@ export default function PostsPage() {
 
   const [isDeleting, setIsDeleting] = useState<number | null>(null);
   const [isPublishing, setIsPublishing] = useState<number | null>(null);
+
+  const user = useAuthStore((state) => state.user);
 
   function formatDate(timestamp: string) {
     return new Date(timestamp).toLocaleDateString("pt-PT");
@@ -146,33 +149,35 @@ export default function PostsPage() {
 
           <p>{post.content}</p>
 
-          <div>
-            <Link href={`/dashboard/posts/${post.id}/edit`}>
-              Editar
-            </Link>
+          {user?.userType === "AUTHOR" && (
+            <div>
+              <Link href={`/dashboard/posts/${post.id}/edit`}>
+                Editar
+              </Link>
 
-            <button
-              type="button"
-              onClick={() =>
-                handleTogglePublished(post.id, post.published)
-              }
-              disabled={isPublishing === post.id}
-            >
-              {isPublishing === post.id
-                ? "A atualizar..."
-                : post.published
-                  ? "Despublicar"
-                  : "Publicar"}
-            </button>
+              <button
+                type="button"
+                onClick={() =>
+                  handleTogglePublished(post.id, post.published)
+                }
+                disabled={isPublishing === post.id}
+              >
+                {isPublishing === post.id
+                  ? "A atualizar..."
+                  : post.published
+                    ? "Despublicar"
+                    : "Publicar"}
+              </button>
 
-            <button
-              type="button"
-              onClick={() => handleDelete(post.id)}
-              disabled={isDeleting === post.id}
-            >
-              {isDeleting === post.id ? "A apagar..." : "Apagar"}
-            </button>
-          </div>
+              <button
+                type="button"
+                onClick={() => handleDelete(post.id)}
+                disabled={isDeleting === post.id}
+              >
+                {isDeleting === post.id ? "A apagar..." : "Apagar"}
+              </button>
+            </div>
+          )}
         </article>
       ))}
     </main>
