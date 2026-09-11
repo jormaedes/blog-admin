@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { getPosts, getToken, deletePost } from "@/lib/api";
+import { getPosts, getToken, deletePost, togglePostPublished } from "@/lib/api";
 import type { Post } from "@/types/post";
 import Link from "next/link";
 
@@ -12,6 +12,7 @@ export default function PostsPage() {
   const [error, setError] = useState("");
 
   const [isDeleting, setIsDeleting] = useState<number | null>(null);
+  const [isPublishing, setIsPublishing] = useState<number | null>(null);
 
   function formatDate(timestamp: string) {
     return new Date(timestamp).toLocaleDateString("pt-PT");
@@ -46,6 +47,40 @@ export default function PostsPage() {
       }
     } finally {
       setIsDeleting(null);
+    }
+  }
+
+  async function handleTogglePublished(
+    postId: number,
+    published: boolean
+  ) {
+    const token = getToken();
+
+    if (!token) {
+      setError("Authentication token not found");
+      return;
+    }
+
+    try {
+      setIsPublishing(postId);
+
+      const updatedPost = await togglePostPublished(
+        String(postId),
+        !published,
+        token
+      );
+
+      setPosts((currentPosts) =>
+        currentPosts.map((post) =>
+          post.id === postId ? updatedPost : post
+        )
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    } finally {
+      setIsPublishing(null);
     }
   }
 
@@ -116,8 +151,18 @@ export default function PostsPage() {
               Editar
             </Link>
 
-            <button type="button">
-              {post.published ? "Despublicar" : "Publicar"}
+            <button
+              type="button"
+              onClick={() =>
+                handleTogglePublished(post.id, post.published)
+              }
+              disabled={isPublishing === post.id}
+            >
+              {isPublishing === post.id
+                ? "A atualizar..."
+                : post.published
+                  ? "Despublicar"
+                  : "Publicar"}
             </button>
 
             <button
