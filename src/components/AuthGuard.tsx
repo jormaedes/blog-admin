@@ -5,17 +5,16 @@ import { useRouter } from "next/navigation";
 
 import useAuthStore from "@/stores/authStore";
 
-interface AuthGuardProps {
+interface AuthorGuardProps {
 	children: ReactNode;
 }
 
-export default function AuthGuard({ children }: AuthGuardProps) {
+export default function AuthorGuard({
+	children,
+}: AuthorGuardProps) {
 	const router = useRouter();
 
-	const isAuthenticated = useAuthStore(
-		(state) => state.isAuthenticated
-	);
-
+	const user = useAuthStore((state) => state.user);
 	const isAuthLoading = useAuthStore(
 		(state) => state.isAuthLoading
 	);
@@ -23,12 +22,21 @@ export default function AuthGuard({ children }: AuthGuardProps) {
 	useEffect(() => {
 		if (isAuthLoading) return;
 
-		if (!isAuthenticated) {
+		if (!user) {
 			router.replace("/login");
+			return;
 		}
-	}, [isAuthLoading, isAuthenticated, router]);
 
-	if (isAuthLoading || !isAuthenticated) {
+		if (user.userType !== "AUTHOR") {
+			router.replace("/dashboard");
+		}
+	}, [isAuthLoading, user, router]);
+
+	if (isAuthLoading || !user) {
+		return null;
+	}
+
+	if (user.userType !== "AUTHOR") {
 		return null;
 	}
 

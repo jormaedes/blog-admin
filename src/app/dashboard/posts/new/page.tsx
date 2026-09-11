@@ -6,6 +6,8 @@ import { Editor } from "@tinymce/tinymce-react";
 
 import { createPost, getToken } from "@/lib/api";
 
+import AuthorGuard from "@/components/AuthGuard";
+
 export default function NewPostPage() {
   const router = useRouter();
 
@@ -48,6 +50,7 @@ export default function NewPostPage() {
   }
 
   return (
+    <AuthorGuard>
     <main>
       <h1>Escrever post</h1>
 
@@ -125,5 +128,6 @@ export default function NewPostPage() {
         </button>
       </form>
     </main>
+    </AuthorGuard>
   );
 }
