@@ -71,3 +71,23 @@ export async function getPost(postId: string, token: string): Promise<Post> {
 
   return response.json();
 }
+
+export async function updatePost(postId: string, title: string, content: string, token: string): Promise<Post> {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title,
+      content,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update post");
+  }
+
+  return response.json();
+}
