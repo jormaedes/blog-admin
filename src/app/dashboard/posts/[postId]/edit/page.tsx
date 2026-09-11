@@ -7,57 +7,85 @@ import { getPost, getToken } from "@/lib/api";
 import type { Post } from "@/types/post";
 
 export default function EditPostPage() {
-	const params = useParams<{ postId: string }>();
-	const [post, setPost] = useState<Post | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState("");
+  const params = useParams<{ postId: string }>();
 
-	useEffect(() => {
-		async function loadPost() {
-			try {
-				const token = getToken();
+  const [post, setPost] = useState<Post | null>(null);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-				if (!token) {
-					throw new Error("Authentication token not found");
-				}
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
-				const data = await getPost(params.postId, token);
+  useEffect(() => {
+    async function loadPost() {
+      try {
+        const token = getToken();
 
-				setPost(data);
-			} catch (error) {
-				if (error instanceof Error) {
-					setError(error.message);
-				}
-			} finally {
-				setIsLoading(false);
-			}
-		}
+        if (!token) {
+          throw new Error("Authentication token not found");
+        }
 
-		loadPost();
-	}, [params.postId]);
+        const data = await getPost(params.postId, token);
 
-	if (isLoading) {
-		return <p>Loading post...</p>;
-	}
+        setPost(data);
+        setTitle(data.title);
+        setContent(data.content);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-	if (error) {
-		return <p>{error}</p>;
-	}
+    loadPost();
+  }, [params.postId]);
 
-	if (!post) {
-		return <p>Post not found.</p>;
-	}
+  if (isLoading) {
+    return <p>Loading post...</p>;
+  }
 
-	return (
-		<main>
-			<h1>Editar post</h1>
+  if (error) {
+    return <p>{error}</p>;
+  }
 
-			<p>ID: {post.id}</p>
-			<p>Título: {post.title}</p>
-			<p>Conteúdo: {post.content}</p>
-			<p>
-				Estado: {post.published ? "Publicado" : "Rascunho"}
-			</p>
-		</main>
-	);
+  if (!post) {
+    return <p>Post not found.</p>;
+  }
+
+  return (
+    <main>
+      <h1>Editar post</h1>
+
+      <form>
+        <div>
+          <label htmlFor="title">Título</label>
+
+          <input
+            id="title"
+            name="title"
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="content">Conteúdo</label>
+
+          <textarea
+            id="content"
+            name="content"
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
+          />
+        </div>
+
+        <button type="submit">
+          Guardar alterações
+        </button>
+      </form>
+    </main>
+  );
 }
