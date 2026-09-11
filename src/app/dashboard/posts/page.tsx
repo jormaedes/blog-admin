@@ -81,6 +81,20 @@ export default function PostsPage() {
     return <p>{error}</p>;
   }
 
+  if (posts.length === 0) {
+    return (
+      <main>
+        <h1>Posts</h1>
+
+        <p>Ainda não existem posts.</p>
+
+        <Link href="/dashboard/posts/new">
+          Escrever primeiro post
+        </Link>
+      </main>
+    );
+  }
+
   return (
     <main>
       <h1>Posts</h1>
