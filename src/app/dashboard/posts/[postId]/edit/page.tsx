@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 
 import { Editor } from "@tinymce/tinymce-react";
 
-import { getPost, getToken, updatePost } from "@/lib/api";
+import { getPost, getToken, updatePost, togglePostPublished } from "@/lib/api";
 import type { Post } from "@/types/post";
 
 export default function EditPostPage() {
@@ -18,7 +18,8 @@ export default function EditPostPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [isSaving, setIsSaving] = useState(false);  
+  const [isSaving, setIsSaving] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false); 
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,6 +44,32 @@ export default function EditPostPage() {
       }
     } finally {
       setIsSaving(false);
+    }
+  }
+
+  async function handleTogglePublished() {
+    try {
+      const token = getToken();
+
+      if (!token) {
+        throw new Error("Authentication token not found");
+      }
+
+      setIsPublishing(true);
+
+      const updatedPost = await togglePostPublished(
+        params.postId,
+        !post!.published,
+        token
+      );
+
+      setPost(updatedPost);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    } finally {
+      setIsPublishing(false);
     }
   }
 
@@ -128,9 +155,19 @@ export default function EditPostPage() {
           />
         </div>
 
-        <button type="submit" disabled={isSaving}>
-          {isSaving ? "A guardar..." : "Guardar alterações"}
-        </button>
+        <div>
+          <button type="submit" disabled={isSaving}>
+            {isSaving ? "A guardar..." : "Guardar alterações"}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleTogglePublished}
+            disabled={isPublishing}
+          >
+            {isPublishing? "A atualizar...": post.published? "Despublicar": "Publicar"}
+          </button>
+        </div>
       </form>
     </main>
   );
