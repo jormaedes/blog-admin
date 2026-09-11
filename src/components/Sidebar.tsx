@@ -9,6 +9,7 @@ export default function Sidebar() {
   const router = useRouter();
 
   const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
 
   function handleLogout() {
     logout();
@@ -27,9 +28,13 @@ export default function Sidebar() {
             <Link href="/dashboard/posts">Posts</Link>
           </li>
 
-          <li>
-            <Link href="/dashboard/posts/new">Escrever post</Link>
-          </li>
+          {user?.userType === "AUTHOR" && (
+            <li>
+              <Link href="/dashboard/posts/new">
+                Escrever post
+              </Link>
+            </li>
+          )}
 
           <li>
             <Link href="/dashboard/users">Utilizadores</Link>
