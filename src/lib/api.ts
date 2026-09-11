@@ -111,3 +111,16 @@ export async function togglePostPublished(postId: string, published: boolean, to
 
   return response.json();
 }
+
+export async function deletePost(postId: string, token: string): Promise<void> {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete post");
+  }
+}
