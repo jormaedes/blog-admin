@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 
 import { Editor } from "@tinymce/tinymce-react";
 
-import { getPost, getToken } from "@/lib/api";
+import { getPost, getToken, updatePost } from "@/lib/api";
 import type { Post } from "@/types/post";
 
 export default function EditPostPage() {
@@ -17,6 +17,34 @@ export default function EditPostPage() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [isSaving, setIsSaving] = useState(false);  
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsSaving(true);
+
+    try {
+      const token = getToken();
+
+      if (!token) {
+        throw new Error("Authentication token not found");
+      }
+
+      await updatePost(
+        params.postId,
+        title,
+        content,
+        token
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    } finally {
+      setIsSaving(false);
+    }
+  }
 
   useEffect(() => {
     async function loadPost() {
@@ -60,7 +88,7 @@ export default function EditPostPage() {
     <main>
       <h1>Editar post</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Título</label>
 
@@ -84,6 +112,7 @@ export default function EditPostPage() {
             init={{
               height: 500,
               menubar: false,
+              entity_encoding: 'raw',
               plugins: [
                 "lists",
                 "link",
@@ -99,8 +128,8 @@ export default function EditPostPage() {
           />
         </div>
 
-        <button type="submit">
-          Guardar alterações
+        <button type="submit" disabled={isSaving}>
+          {isSaving ? "A guardar..." : "Guardar alterações"}
         </button>
       </form>
     </main>
