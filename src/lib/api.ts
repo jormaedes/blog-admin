@@ -146,7 +146,14 @@ export async function createPost(title: string, content: string, published: bool
   return response.json();
 }
 
-export async function updateUser(userId: number, firstName: string, lastName: string, token: string): Promise<User> {
+export async function updateUser(
+  userId: number,
+  firstName: string,
+  lastName: string,
+  username: string,
+  token: string,
+  password?: string
+): Promise<User> {
   const response = await fetch(`${API_URL}/users/${userId}`, {
     method: "PUT",
     headers: {
@@ -156,10 +163,16 @@ export async function updateUser(userId: number, firstName: string, lastName: st
     body: JSON.stringify({
       firstname: firstName,
       lastname: lastName,
+      username,
+      ...(password && { password }),
     }),
   });
 
   if (!response.ok) {
+    if (response.status === 409) {
+      throw new Error("Username already exists");
+    }
+
     throw new Error("Failed to update user");
   }
 

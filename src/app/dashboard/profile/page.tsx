@@ -9,8 +9,19 @@ export default function ProfilePage() {
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
 
-  const [firstName, setFirstName] = useState(user?.firstName ?? "");
-  const [lastName, setLastName] = useState(user?.lastName ?? "");
+  const [firstName, setFirstName] = useState(
+    user?.firstName ?? ""
+  );
+
+  const [lastName, setLastName] = useState(
+    user?.lastName ?? ""
+  );
+
+  const [username, setUsername] = useState(
+    user?.username ?? ""
+  );
+
+  const [password, setPassword] = useState("");
 
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
@@ -46,10 +57,13 @@ export default function ProfilePage() {
         user.id,
         firstName,
         lastName,
-        token
+        username,
+        token,
+        password
       );
 
       setUser(updatedUser);
+      setPassword("");
 
       setMessage("Perfil atualizado com sucesso.");
     } catch (error) {
@@ -64,16 +78,6 @@ export default function ProfilePage() {
   return (
     <main>
       <h1>Perfil</h1>
-
-      <div>
-        <p>
-          <strong>Username:</strong> {user.username}
-        </p>
-
-        <p>
-          <strong>Tipo:</strong> {user.userType}
-        </p>
-      </div>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -106,11 +110,44 @@ export default function ProfilePage() {
           />
         </div>
 
+        <div>
+          <label htmlFor="username">
+            Username
+          </label>
+
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(event) =>
+              setUsername(event.target.value)
+            }
+          />
+        </div>
+
+        <div>
+          <label htmlFor="password">
+            Nova password
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(event) =>
+              setPassword(event.target.value)
+            }
+            placeholder="Deixe vazio para não alterar"
+          />
+        </div>
+
         <button
           type="submit"
           disabled={isSaving}
         >
-          {isSaving ? "A guardar..." : "Guardar alterações"}
+          {isSaving
+            ? "A guardar..."
+            : "Guardar alterações"}
         </button>
       </form>
 
