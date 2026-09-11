@@ -57,3 +57,17 @@ export async function getPosts(token: string): Promise<Post[]> {
 
   return response.json();
 }
+
+export async function getPost(postId: string, token: string): Promise<Post> {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to get post");
+  }
+
+  return response.json();
+}
