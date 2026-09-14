@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
-import { getPost, getToken } from "@/lib/api";
+import { getComments, getPost, getToken } from "@/lib/api";
 import type { Post } from "@/types/post";
 import Link from "next/link";
+
+import type { Comment } from "@/types/comment";
 
 import PostContent from "@/components/PostContent";
 
@@ -15,6 +17,8 @@ export default function PostPage() {
   const [post, setPost] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
     async function loadPost() {
@@ -28,8 +32,10 @@ export default function PostPage() {
 
       try {
         const data = await getPost(params.postId, token);
+        const commentsData = await getComments(params.postId, token);
 
         setPost(data);
+        setComments(commentsData);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);

@@ -1,5 +1,6 @@
 import type { LoginResponse, User } from "@/types/auth";
 import type { Post } from "@/types/post";
+import type { Comment } from "@/types/comment";
 
 const API_URL = "http://localhost:3300";
 
@@ -188,6 +189,23 @@ export async function getUsers(token: string): Promise<User[]> {
 
   if (!response.ok) {
     throw new Error("Failed to get users");
+  }
+
+  return response.json();
+}
+
+export async function getComments(postId: string, token: string): Promise<Comment[]> {
+  const response = await fetch(
+    `${API_URL}/posts/${postId}/comments`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to get comments");
   }
 
   return response.json();
