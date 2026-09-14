@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { deleteComment, updateComment } from "@/lib/api";
+import { deleteComment, updateComment, likeComment, unlikeComment } from "@/lib/api";
 import type { Comment } from "@/types/comment";
 
 interface CommentListProps {
@@ -14,11 +14,20 @@ interface CommentListProps {
 	onCommentUpdated: (comment: Comment) => void;
 }
 
-export default function CommentList({ comments, currentUserId, isPostAuthor, token, onCommentDeleted, onCommentUpdated }: CommentListProps) {
+export default function CommentList({
+	comments,
+	currentUserId,
+	isPostAuthor,
+	token,
+	onCommentDeleted,
+	onCommentUpdated
+}: CommentListProps) {
 	const [isDeleting, setIsDeleting] = useState<number | null>(null);
 
 	const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 	const [editingContent, setEditingContent] = useState("");
+
+	const [isLiking, setIsLiking] = useState<number | null>(null);
 
 	async function handleDelete(commentId: number) {
 		const confirmed = window.confirm(
@@ -64,6 +73,32 @@ export default function CommentList({ comments, currentUserId, isPostAuthor, tok
 			if (error instanceof Error) {
 				console.error(error);
 			}
+		}
+	}
+
+	async function handleToggleLike(comment: Comment) {
+		try {
+			setIsLiking(comment.id);
+
+			if (comment.likedByMe) {
+				await unlikeComment(comment.id, token);
+			} else {
+				await likeComment(comment.id, token);
+			}
+
+			onCommentUpdated({
+				...comment,
+				likedByMe: !comment.likedByMe,
+				likesCount: comment.likedByMe
+					? comment.likesCount - 1
+					: comment.likesCount + 1,
+			});
+		} catch (error) {
+			if (error instanceof Error) {
+				console.error(error);
+			}
+		} finally {
+			setIsLiking(null);
 		}
 	}
 
@@ -146,6 +181,19 @@ export default function CommentList({ comments, currentUserId, isPostAuthor, tok
 									comment.timestamp
 								).toLocaleDateString("pt-PT")}
 							</time>
+
+							<button
+								type="button"
+								onClick={() => handleToggleLike(comment)}
+								disabled={isLiking === comment.id}
+							>
+								{comment.likedByMe ? "Descurtir" : "Curtir"}
+							</button>
+
+							<span>
+								{comment.likesCount}{" "}
+								{comment.likesCount === 1 ? "like" : "likes"}
+							</span>
 
 							{canDelete && (
 								<button
