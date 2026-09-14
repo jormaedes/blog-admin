@@ -145,6 +145,12 @@ export default function PostsPage() {
             </Link>
           </h2>
 
+          <p>
+            Por {post.author.firstName} {post.author.lastName}
+            {" "}
+            (@{post.author.username})
+          </p>
+
           <p>{formatDate(post.timestamp)}</p>
 
           <p>
