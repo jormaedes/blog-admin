@@ -12,21 +12,25 @@ export default function StatCard({
 	icon: Icon,
 }: StatCardProps) {
 	return (
-		<div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
-			<div className="flex items-center justify-between">
-				<p className="text-sm text-gray-500 dark:text-gray-400">
-					{label}
-				</p>
+		<div className="min-h-32 rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
+			<div className="flex h-full items-center justify-between">
+				<div>
+					<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+						{label}
+					</p>
 
-				<Icon
-					size={18}
-					className="text-gray-400 dark:text-gray-500"
-				/>
+					<p className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">
+						{value}
+					</p>
+				</div>
+
+				<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800">
+					<Icon
+						size={19}
+						className="text-gray-500 dark:text-gray-400"
+					/>
+				</div>
 			</div>
-
-			<p className="mt-3 text-2xl font-semibold text-gray-900 dark:text-white">
-				{value}
-			</p>
 		</div>
 	);
 }
