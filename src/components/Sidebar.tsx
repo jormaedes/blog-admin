@@ -1,15 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useAuthStore from "@/stores/authStore";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+
+import {
+  FileText,
+  LayoutDashboard,
+  LogOut,
+  User,
+  Users,
+  PenLine,
+} from "lucide-react";
+
+const navigation = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    label: "Posts",
+    href: "/dashboard/posts",
+    icon: FileText,
+  },
+  {
+    label: "Escrever post",
+    href: "/dashboard/posts/new",
+    icon: PenLine,
+    authorOnly: true,
+  },
+  {
+    label: "Utilizadores",
+    href: "/dashboard/users",
+    icon: Users,
+  },
+  {
+    label: "Perfil",
+    href: "/dashboard/profile",
+    icon: User,
+  },
+];
 
 export default function Sidebar() {
   const router = useRouter();
 
   const logout = useAuthStore((state) => state.logout);
   const user = useAuthStore((state) => state.user);
+  const pathname = usePathname();
 
   function handleLogout() {
     logout();
@@ -30,37 +69,34 @@ export default function Sidebar() {
 
         <nav className="flex-1">
           <ul className="space-y-1">
-            <li>
-              <Link href="/dashboard">
-                Dashboard
-              </Link>
-            </li>
+            {navigation.map((item) => {
+              if (item.authorOnly && user?.userType !== "AUTHOR") {
+                return null;
+              }
 
-            <li>
-              <Link href="/dashboard/posts">
-                Posts
-              </Link>
-            </li>
+              const isActive = pathname === item.href;
+              const Icon = item.icon;
 
-            {user?.userType === "AUTHOR" && (
-              <li>
-                <Link href="/dashboard/posts/new">
-                  Escrever post
-                </Link>
-              </li>
-            )}
-
-            <li>
-              <Link href="/dashboard/users">
-                Utilizadores
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/dashboard/profile">
-                Perfil
-              </Link>
-            </li>
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={`
+              flex items-center gap-3 rounded-lg px-3 py-2
+              text-sm font-medium
+              transition-colors
+              ${isActive
+                        ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-900 dark:hover:text-white"
+                      }
+            `}
+                  >
+                    <Icon size={18} strokeWidth={2} />
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -70,8 +106,10 @@ export default function Sidebar() {
           <button
             type="button"
             onClick={handleLogout}
+            className="cursor-pointer flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-900 dark:hover:text-white"
           >
-            Logout
+            <LogOut size={18} strokeWidth={2} />
+            <span>Logout</span>
           </button>
         </footer>
       </div>
