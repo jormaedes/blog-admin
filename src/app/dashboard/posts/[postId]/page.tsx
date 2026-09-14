@@ -55,42 +55,47 @@ export default function PostPage() {
   }
 
   return (
-  <main>
-    <article>
-      <div>
-        <Link href="/dashboard/posts">
-          ← Voltar aos posts
-        </Link>
-      </div>
-
-      <header>
-        <h1>{post.title}</h1>
-
+    <main>
+      <article>
         <div>
-          <time dateTime={post.timestamp}>
-            {new Date(post.timestamp).toLocaleDateString()}
-          </time>
-
-          <span>
-            {post.published
-              ? "Publicado"
-              : "Rascunho"}
-          </span>
+          <Link href="/dashboard/posts">
+            ← Voltar aos posts
+          </Link>
         </div>
-      </header>
 
-      <PostContent content={post.content} />
-    </article>
+        <header>
+          <h1>{post.title}</h1>
 
-    <footer>
-      <Link href="/dashboard/posts">
-        Voltar aos posts
-      </Link>
+          <p>
+            Por {post.author.firstName} {post.author.lastName} (@
+            {post.author.username})
+          </p>
 
-      <Link href={`/dashboard/posts/${post.id}/edit`}>
-        Editar
-      </Link>
-    </footer>
-  </main>
-);
+          <div>
+            <time dateTime={post.timestamp}>
+              {new Date(post.timestamp).toLocaleDateString()}
+            </time>
+
+            <span>
+              {post.published
+                ? "Publicado"
+                : "Rascunho"}
+            </span>
+          </div>
+        </header>
+
+        <PostContent content={post.content} />
+      </article>
+
+      <footer>
+        <Link href="/dashboard/posts">
+          Voltar aos posts
+        </Link>
+
+        <Link href={`/dashboard/posts/${post.id}/edit`}>
+          Editar
+        </Link>
+      </footer>
+    </main>
+  );
 }

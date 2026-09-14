@@ -1,3 +1,9 @@
+export interface PostAuthor {
+	username: string;
+	firstName: string;
+	lastName: string;
+}
+
 export interface Post {
 	id: number;
 	title: string;
@@ -5,4 +11,5 @@ export interface Post {
 	published: boolean;
 	timestamp: string;
 	authorId: number;
+	author: PostAuthor;
 }
