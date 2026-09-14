@@ -40,6 +40,10 @@ export default function DashboardPage() {
     loadPosts();
   }, []);
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   const totalPosts = posts.length;
 
   const publishedPosts = posts.filter(
@@ -54,10 +58,6 @@ export default function DashboardPage() {
     (total, post) => total + post.likesCount,
     0
   );
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <div className="p-6">
