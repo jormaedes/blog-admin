@@ -3,13 +3,15 @@ import { Edit, Eye, Trash2 } from "lucide-react";
 import type { Post } from "@/types/post";
 
 interface PostManagementItemProps {
-	post: Post;
-	onDelete: (postId: number) => void;
+  post: Post;
+  onDelete: (postId: number) => void;
+  onTogglePublished: (post: Post) => void;
 }
 
 export default function PostManagementItem({
 	post,
 	onDelete,
+	onTogglePublished
 }: PostManagementItemProps) {
 	return (
 		<div className="flex items-center gap-4 border-b border-gray-100 px-4 py-4 last:border-b-0 dark:border-gray-800">
@@ -27,15 +29,17 @@ export default function PostManagementItem({
 			</div>
 
 			<div className="hidden w-28 sm:block">
-				<span
+				<button
+					type="button"
+					onClick={() => onTogglePublished(post)}
 					className={
 						post.published
-							? "rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-950/40 dark:text-green-400"
-							: "rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+							? "rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700 transition-colors hover:bg-green-100 dark:bg-green-950/40 dark:text-green-400 dark:hover:bg-green-950/60"
+							: "rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
 					}
 				>
 					{post.published ? "Publicado" : "Rascunho"}
-				</span>
+				</button>
 			</div>
 
 			<div className="hidden w-20 text-sm text-gray-500 dark:text-gray-400 md:block">

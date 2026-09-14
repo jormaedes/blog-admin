@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PenLine } from "lucide-react";
 
-import { deletePost, getPosts, getToken } from "@/lib/api";
+import { deletePost, getPosts, getToken, togglePostPublished } from "@/lib/api";
 import type { Post } from "@/types/post";
 import PostManagementItem from "@/components/PostManagementItem";
 
@@ -57,6 +57,33 @@ export default function PostsPage() {
 
       setPosts((currentPosts) =>
         currentPosts.filter((post) => post.id !== postId)
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleTogglePublished(post: Post) {
+    try {
+      const token = getToken();
+
+      if (!token) return;
+
+      await togglePostPublished(
+        post.id.toString(),
+        !post.published,
+        token
+      );
+
+      setPosts((currentPosts) =>
+        currentPosts.map((currentPost) =>
+          currentPost.id === post.id
+            ? {
+              ...currentPost,
+              published: !currentPost.published,
+            }
+            : currentPost
+        )
       );
     } catch (error) {
       console.error(error);
@@ -175,6 +202,7 @@ export default function PostsPage() {
           
           filteredPosts.map((post) => (
             <PostManagementItem
+              onTogglePublished={handleTogglePublished}
               key={post.id}
               post={post}
               onDelete={handleDelete}
