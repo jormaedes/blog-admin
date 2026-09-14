@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PenLine } from "lucide-react";
 
-import { getPosts, getToken } from "@/lib/api";
+import { deletePost, getPosts, getToken } from "@/lib/api";
 import type { Post } from "@/types/post";
 import PostManagementItem from "@/components/PostManagementItem";
 
@@ -41,8 +41,26 @@ export default function PostsPage() {
     return true;
   });
 
-  function handleDelete(postId: number) {
-    console.log("Delete post:", postId);
+  async function handleDelete(postId: number) {
+    const confirmed = window.confirm(
+      "Tem certeza de que deseja eliminar este post?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      const token = getToken();
+
+      if (!token) return;
+
+      await deletePost(postId.toString(), token);
+
+      setPosts((currentPosts) =>
+        currentPosts.filter((post) => post.id !== postId)
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   if (isLoading) {
