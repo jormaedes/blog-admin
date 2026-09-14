@@ -55,26 +55,42 @@ export default function PostPage() {
   }
 
   return (
-    <main>
-      <article>
-        <h1>{post.title}</h1>
-
-        <p>
-          {new Date(post.timestamp).toLocaleDateString()}
-        </p>
-
-        <PostContent content={post.content}/>
-      </article>
-
+  <main>
+    <article>
       <div>
         <Link href="/dashboard/posts">
-          Voltar aos posts
-        </Link>
-
-        <Link href={`/dashboard/posts/${post.id}/edit`}>
-          Editar
+          ← Voltar aos posts
         </Link>
       </div>
-    </main>
-  );
+
+      <header>
+        <h1>{post.title}</h1>
+
+        <div>
+          <time dateTime={post.timestamp}>
+            {new Date(post.timestamp).toLocaleDateString()}
+          </time>
+
+          <span>
+            {post.published
+              ? "Publicado"
+              : "Rascunho"}
+          </span>
+        </div>
+      </header>
+
+      <PostContent content={post.content} />
+    </article>
+
+    <footer>
+      <Link href="/dashboard/posts">
+        Voltar aos posts
+      </Link>
+
+      <Link href={`/dashboard/posts/${post.id}/edit`}>
+        Editar
+      </Link>
+    </footer>
+  </main>
+);
 }
