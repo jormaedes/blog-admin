@@ -10,6 +10,7 @@ import Link from "next/link";
 import type { Comment } from "@/types/comment";
 
 import PostContent from "@/components/PostContent";
+import CommentList from "@/components/CommentList";
 
 export default function PostPage() {
   const params = useParams<{ postId: string }>();
@@ -91,6 +92,7 @@ export default function PostPage() {
         </header>
 
         <PostContent content={post.content} />
+        <CommentList comments={comments} />
       </article>
 
       <footer>
