@@ -7,6 +7,8 @@ import { getPost, getToken } from "@/lib/api";
 import type { Post } from "@/types/post";
 import Link from "next/link";
 
+import PostContent from "@/components/PostContent";
+
 export default function PostPage() {
   const params = useParams<{ postId: string }>();
 
@@ -61,11 +63,7 @@ export default function PostPage() {
           {new Date(post.timestamp).toLocaleDateString()}
         </p>
 
-        <div
-          dangerouslySetInnerHTML={{
-            __html: post.content,
-          }}
-        />
+        <PostContent content={post.content}/>
       </article>
 
       <div>
