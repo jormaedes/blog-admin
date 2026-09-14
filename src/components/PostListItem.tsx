@@ -35,9 +35,15 @@ export default function PostListItem({
 				</span>
 			</div>
 
-			<div className="mt-2 flex items-center gap-3 text-xs text-gray-400">
+			<div className="mt-2 flex items-center gap-4 text-xs text-gray-400">
 				<span>
-					{post.likesCount} {post.likesCount === 1 ? "like" : "likes"}
+					{post.likesCount}{" "}
+					{post.likesCount === 1 ? "like" : "likes"}
+				</span>
+
+				<span>
+					{post.commentsCount}{" "}
+					{post.commentsCount === 1 ? "comentário" : "comentários"}
 				</span>
 
 				<span>
