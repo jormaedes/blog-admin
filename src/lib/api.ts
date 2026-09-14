@@ -1,6 +1,6 @@
 import type { LoginResponse, User } from "@/types/auth";
 import type { Post } from "@/types/post";
-import type { Comment } from "@/types/comment";
+import type { Comment, RecentComment } from "@/types/comment";
 
 const API_URL = "http://localhost:3300";
 
@@ -337,4 +337,20 @@ export async function unlikeComment(commentId: number, token: string): Promise<v
   if (!response.ok) {
     throw new Error("Failed to unlike comment");
   }
+}
+
+export async function getRecentComments(
+  token: string
+): Promise<RecentComment[]> {
+  const response = await fetch(`${API_URL}/comments/recent`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch recent comments");
+  }
+
+  return response.json();
 }

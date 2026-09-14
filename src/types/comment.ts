@@ -15,3 +15,19 @@ export interface Comment {
   likesCount: number;
   likedByMe: boolean;
 }
+
+export interface RecentComment {
+  id: number;
+  content: string;
+  timestamp: string;
+  user: {
+    username: string;
+    firstName: string;
+    lastName: string;
+  };
+  post: {
+    id: number;
+    title: string;
+  };
+  likesCount: number;
+}

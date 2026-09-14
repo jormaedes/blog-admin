@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-import { getPosts, getToken } from "@/lib/api";
+import { getPosts, getToken, getRecentComments } from "@/lib/api";
 import useAuthStore from "@/stores/authStore";
 import type { Post } from "@/types/post";
+import type { RecentComment } from "@/types/comment";
 import {
   FileText,
   MessageCircle,
@@ -15,31 +16,37 @@ import {
 import StatCard from "@/components/StatCard";
 import PostListItem from "@/components/PostListItem";
 import Link from "next/link";
+import RecentCommentItem from "@/components/RecentCommentItem";
 
 export default function DashboardPage() {
   const user = useAuthStore((state) => state.user);
 
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [recentComments, setRecentComments] = useState<RecentComment[]>([]);
+
+  async function loadDashboard() {
+    try {
+      const token = getToken();
+
+      if (!token) return;
+
+      const [postsData, commentsData] = await Promise.all([
+        getPosts(token),
+        getRecentComments(token),
+      ]);
+
+      setPosts(postsData);
+      setRecentComments(commentsData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    async function loadPosts() {
-      try {
-        const token = getToken();
-
-        if (!token) return;
-
-        const data = await getPosts(token);
-
-        setPosts(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    loadPosts();
+    loadDashboard();
   }, []);
 
   if (isLoading) {
@@ -156,11 +163,20 @@ export default function DashboardPage() {
           </div>
 
           <div className="rounded-xl border border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-900">
-            <div className="px-4 py-10 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Os comentários recentes aparecerão aqui.
-              </p>
-            </div>
+           {recentComments.length === 0 ? (
+  <div className="px-4 py-10 text-center">
+    <p className="text-sm text-gray-500 dark:text-gray-400">
+      Ainda não existem comentários.
+    </p>
+  </div>
+) : (
+  recentComments.map((comment) => (
+    <RecentCommentItem
+      key={comment.id}
+      comment={comment}
+    />
+  ))
+)}
           </div>
         </section>
       </div>
