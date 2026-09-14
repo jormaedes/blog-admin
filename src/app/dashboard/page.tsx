@@ -136,7 +136,32 @@ export default function DashboardPage() {
         </section>
 
         <section>
-          {/* Comentários recentes */}
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Comentários recentes
+              </h2>
+
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                Últimas interações no teu blog.
+              </p>
+            </div>
+
+            <Link
+              href="/dashboard/posts"
+              className="text-sm font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
+            >
+              Ver posts
+            </Link>
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-900">
+            <div className="px-4 py-10 text-center">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Os comentários recentes aparecerão aqui.
+              </p>
+            </div>
+          </div>
         </section>
       </div>
     </div>
