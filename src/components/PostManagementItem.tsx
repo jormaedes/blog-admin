@@ -4,7 +4,7 @@ import type { Post } from "@/types/post";
 
 interface PostManagementItemProps {
   post: Post;
-  onDelete: (postId: number) => void;
+  onDelete: (post: Post) => void;
   onTogglePublished: (post: Post) => void;
   isUpdating: boolean;
 }
@@ -84,7 +84,7 @@ export default function PostManagementItem({
 
 				<button
 					type="button"
-					onClick={() => onDelete(post.id)}
+					onClick={() => onDelete(post)}
 					aria-label="Eliminar post"
 					className="flex h-8 w-8 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:text-gray-400 dark:hover:bg-red-950/40 dark:hover:text-red-400"
 				>

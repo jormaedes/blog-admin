@@ -7,6 +7,7 @@ import { PenLine } from "lucide-react";
 import { deletePost, getPosts, getToken, togglePostPublished } from "@/lib/api";
 import type { Post } from "@/types/post";
 import PostManagementItem from "@/components/PostManagementItem";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 type Filter = "all" | "published" | "drafts";
 
@@ -15,6 +16,8 @@ export default function PostsPage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [isLoading, setIsLoading] = useState(true);
   const [updatingPostId, setUpdatingPostId] = useState<number | null>(null);
+  const [postToDelete, setPostToDelete] = useState<Post | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     async function loadPosts() {
@@ -42,26 +45,33 @@ export default function PostsPage() {
     return true;
   });
 
-  async function handleDelete(postId: number) {
-    const confirmed = window.confirm(
-      "Tem certeza de que deseja eliminar este post?"
-    );
 
-    if (!confirmed) return;
+  async function confirmDelete() {
+    if (!postToDelete) return;
 
     try {
       const token = getToken();
 
       if (!token) return;
 
-      await deletePost(postId.toString(), token);
+      setIsDeleting(true);
+
+      await deletePost(postToDelete.id.toString(), token);
 
       setPosts((currentPosts) =>
-        currentPosts.filter((post) => post.id !== postId)
+        currentPosts.filter((post) => post.id !== postToDelete.id)
       );
+
+      setPostToDelete(null);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsDeleting(false);
     }
+  }
+
+  function handleDelete(post: Post) {
+    setPostToDelete(post);
   }
 
   async function handleTogglePublished(post: Post) {
@@ -95,7 +105,7 @@ export default function PostsPage() {
     }
   }
 
-  
+
 
   if (isLoading) {
     return (
@@ -136,8 +146,8 @@ export default function PostsPage() {
           type="button"
           onClick={() => setFilter("all")}
           className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${filter === "all"
-              ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
-              : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+            : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             }`}
         >
           Todos
@@ -147,8 +157,8 @@ export default function PostsPage() {
           type="button"
           onClick={() => setFilter("published")}
           className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${filter === "published"
-              ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
-              : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+            : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             }`}
         >
           Publicados
@@ -158,8 +168,8 @@ export default function PostsPage() {
           type="button"
           onClick={() => setFilter("drafts")}
           className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${filter === "drafts"
-              ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
-              : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+            : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             }`}
         >
           Rascunhos
@@ -206,7 +216,7 @@ export default function PostsPage() {
             </p>
           </div>
         ) : (
-          
+
           filteredPosts.map((post) => (
             <PostManagementItem
               onTogglePublished={handleTogglePublished}
@@ -217,6 +227,25 @@ export default function PostsPage() {
             />
           ))
         )}
+
+        <ConfirmDialog
+          open={postToDelete !== null}
+          title="Eliminar post?"
+          description={
+            postToDelete
+              ? `Tem certeza de que deseja eliminar "${postToDelete.title}"? Esta ação não pode ser desfeita.`
+              : ""
+          }
+          confirmLabel="Eliminar"
+          cancelLabel="Cancelar"
+          isLoading={isDeleting}
+          onConfirm={confirmDelete}
+          onCancel={() => {
+            if (!isDeleting) {
+              setPostToDelete(null);
+            }
+          }}
+        />
       </div>
     </div>
   );
