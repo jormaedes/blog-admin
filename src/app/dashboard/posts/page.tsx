@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { getPosts, getToken, deletePost, togglePostPublished } from "@/lib/api";
 import useAuthStore from "@/stores/authStore";
 import type { Post } from "@/types/post";
+import PostCard from "@/components/PostCard";
+
 import Link from "next/link";
 
 export default function PostsPage() {
@@ -53,10 +55,7 @@ export default function PostsPage() {
     }
   }
 
-  async function handleTogglePublished(
-    postId: number,
-    published: boolean
-  ) {
+  async function handleTogglePublished(postId: number, published: boolean) {
     const token = getToken();
 
     if (!token) {
@@ -138,60 +137,14 @@ export default function PostsPage() {
       <h1>Posts</h1>
 
       {posts.map((post) => (
-        <article key={post.id}>
-          <h2>
-            <Link href={`/dashboard/posts/${post.id}`}>
-              {post.title}
-            </Link>
-          </h2>
-
-          <p>
-            Por {post.author.firstName} {post.author.lastName}
-            {" "}
-            (@{post.author.username})
-          </p>
-
-          <p>{formatDate(post.timestamp)}</p>
-
-          <p>
-            {post.published ? "Publicado" : "Rascunho"}
-          </p>
-
-          <p>{post.content}</p>
-
-          {user?.userType === "AUTHOR" && (
-            <div>
-              <Link href={`/dashboard/posts/${post.id}`}>
-                Ver
-              </Link>
-              <Link href={`/dashboard/posts/${post.id}/edit`}>
-                Editar
-              </Link>
-
-              <button
-                type="button"
-                onClick={() =>
-                  handleTogglePublished(post.id, post.published)
-                }
-                disabled={isPublishing === post.id}
-              >
-                {isPublishing === post.id
-                  ? "A atualizar..."
-                  : post.published
-                    ? "Despublicar"
-                    : "Publicar"}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleDelete(post.id)}
-                disabled={isDeleting === post.id}
-              >
-                {isDeleting === post.id ? "A apagar..." : "Apagar"}
-              </button>
-            </div>
-          )}
-        </article>
+        <PostCard
+          key={post.id}
+          post={post}
+          isDeleting={isDeleting === post.id}
+          isPublishing={isPublishing === post.id}
+          onDelete={handleDelete}
+          onTogglePublished={handleTogglePublished}
+        />
       ))}
     </main>
   );
