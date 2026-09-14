@@ -266,3 +266,35 @@ export async function updateComment(commentId: number, content: string, token: s
 
   return response.json();
 }
+
+export async function likePost(postId: string, token: string): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/posts/${postId}/like`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to like post");
+  }
+}
+
+export async function unlikePost(postId: string, token: string): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/posts/${postId}/like`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to unlike post");
+  }
+}

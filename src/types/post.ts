@@ -12,4 +12,6 @@ export interface Post {
 	timestamp: string;
 	authorId: number;
 	author: PostAuthor;
+	likesCount: number;
+	likedByMe: boolean;
 }
