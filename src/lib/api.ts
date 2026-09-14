@@ -230,3 +230,19 @@ export async function createComment(postId: string, content: string, token: stri
 
   return response.json();
 }
+
+export async function deleteComment(commentId: number, token: string): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to delete comment");
+  }
+}

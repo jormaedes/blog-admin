@@ -12,6 +12,7 @@ import type { Comment } from "@/types/comment";
 import PostContent from "@/components/PostContent";
 import CommentList from "@/components/CommentList";
 import CommentForm from "@/components/CommentForm";
+import useAuthStore from "@/stores/authStore";
 
 export default function PostPage() {
   const params = useParams<{ postId: string }>();
@@ -21,6 +22,8 @@ export default function PostPage() {
   const [error, setError] = useState("");
 
   const [comments, setComments] = useState<Comment[]>([]);
+  const user = useAuthStore((state) => state.user);
+
 
   useEffect(() => {
     async function loadPost() {
@@ -98,7 +101,21 @@ export default function PostPage() {
         </header>
 
         <PostContent content={post.content} />
-        <CommentList comments={comments} />
+        {user && (
+          <CommentList
+            comments={comments}
+            currentUserId={user.id}
+            isPostAuthor={user.id === post.authorId}
+            token={token}
+            onCommentDeleted={(commentId) => {
+              setComments((currentComments) =>
+                currentComments.filter(
+                  (comment) => comment.id !== commentId
+                )
+              );
+            }}
+          />
+        )}
         <CommentForm
           postId={params.postId}
           token={token}
