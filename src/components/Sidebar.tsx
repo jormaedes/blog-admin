@@ -47,7 +47,7 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      <footer className="mt-auto">
+      <footer className="mt-auto space-y-2">
         <ThemeSwitcher />
 
         <button type="button" onClick={handleLogout}>
