@@ -13,13 +13,29 @@ interface PostCardProps {
 	) => void;
 }
 
-export default function PostCard({post, isDeleting, isPublishing, onDelete, onTogglePublished}: PostCardProps) {
+function getCoverImage(content: string) {
+	const match = content.match(
+		/<img[^>]+src=["']([^"']+)["']/i
+	);
+
+	return match?.[1] ?? null;
+}
+
+
+export default function PostCard({ post, isDeleting, isPublishing, onDelete, onTogglePublished }: PostCardProps) {
 	function formatDate(timestamp: string) {
 		return new Date(timestamp).toLocaleDateString("pt-PT");
 	}
 
+	 const coverImage = getCoverImage(post.content);
+
 	return (
-		<article>
+		<article className="relative"
+			style={{
+				backgroundImage: coverImage
+					? `url(${coverImage})`
+					: undefined,
+			}}>
 			<h2>
 				<Link href={`/dashboard/posts/${post.id}`}>
 					{post.title}
@@ -40,7 +56,7 @@ export default function PostCard({post, isDeleting, isPublishing, onDelete, onTo
 					: "Rascunho"}
 			</p>
 
-			<p>{post.content}</p>
+			{/* <p>{post.content}</p> */}
 
 			<div>
 				<Link href={`/dashboard/posts/${post.id}`}>
