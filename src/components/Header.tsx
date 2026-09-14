@@ -2,16 +2,44 @@
 
 import Link from "next/link";
 import useAuthStore from "@/stores/authStore";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const user = useAuthStore((state) => state.user);
+  const pathname = usePathname();
+
+  function getPageTitle(pathname: string) {
+    if (pathname === "/dashboard") {
+      return "Dashboard";
+    }
+
+    if (pathname === "/dashboard/posts") {
+      return "Posts";
+    }
+
+    if (pathname === "/dashboard/posts/new") {
+      return "Escrever post";
+    }
+
+    if (pathname === "/dashboard/users") {
+      return "Utilizadores";
+    }
+
+    if (pathname === "/dashboard/profile") {
+      return "Perfil";
+    }
+
+    return "Dashboard";
+  }
+
+  const pageTitle = getPageTitle(pathname);
 
   return (
     <header className="sticky top-0 z-30 border-b border-gray-200 bg-white/95 backdrop-blur dark:border-gray-800 dark:bg-gray-950/95">
       <div className="flex h-16 items-center justify-between px-6">
         <div>
           <h1 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Dashboard
+            {pageTitle}
           </h1>
         </div>
 
