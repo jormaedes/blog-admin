@@ -6,7 +6,6 @@ import { useParams, useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Edit,
-  Heart,
   Loader2,
   MessageCircle,
   Trash2,
@@ -28,6 +27,7 @@ import PostContent from "@/components/PostContent";
 import CommentList from "@/components/CommentList";
 import CommentForm from "@/components/CommentForm";
 import ConfirmDialog from "@/components/ConfirmDialog";
+import PostLikeButton from "@/components/PostLikeButton";
 
 export default function PostPage() {
   const params = useParams();
@@ -137,16 +137,33 @@ export default function PostPage() {
     }
   }
 
+  function handlePostLikeChanged(
+    likedByMe: boolean,
+    likesCount: number
+  ) {
+    setPost((currentPost) =>
+      currentPost
+        ? {
+            ...currentPost,
+            likedByMe,
+            likesCount,
+          }
+        : currentPost
+    );
+  }
+
   if (isLoading) {
     return (
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="animate-pulse space-y-6">
             <div className="h-4 w-32 rounded bg-gray-200 dark:bg-gray-800" />
+
             <div className="space-y-3">
               <div className="h-10 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
               <div className="h-4 w-48 rounded bg-gray-200 dark:bg-gray-800" />
             </div>
+
             <div className="space-y-4 pt-6">
               <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-800" />
               <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-800" />
@@ -284,19 +301,31 @@ export default function PostPage() {
           </main>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-gray-200 py-5 dark:border-gray-800">
-            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-              <Heart size={17} />
-              <span>
+            {token && (
+              <PostLikeButton
+                postId={post.id}
+                likedByMe={post.likedByMe}
+                likesCount={post.likesCount}
+                token={token}
+                onLikeChanged={handlePostLikeChanged}
+              />
+            )}
+
+            {!token && (
+              <div className="text-sm text-gray-500 dark:text-gray-400">
                 {post.likesCount}{" "}
                 {post.likesCount === 1 ? "gosto" : "gostos"}
-              </span>
-            </div>
+              </div>
+            )}
 
             <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
               <MessageCircle size={17} />
+
               <span>
                 {comments.length}{" "}
-                {comments.length === 1 ? "comentário" : "comentários"}
+                {comments.length === 1
+                  ? "comentário"
+                  : "comentários"}
               </span>
             </div>
           </div>
