@@ -140,7 +140,10 @@ export default function PostsPage() {
       {posts.map((post) => (
         <article key={post.id}>
           <h2>
-            {post.title}</h2>
+            <Link href={`/dashboard/posts/${post.id}`}>
+              {post.title}
+            </Link>
+          </h2>
 
           <p>{formatDate(post.timestamp)}</p>
 
