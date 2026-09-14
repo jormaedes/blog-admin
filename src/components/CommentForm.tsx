@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { createComment } from "@/lib/api";
 import type { Comment } from "@/types/comment";
+import { Loader2, Send } from "lucide-react";
 
 interface CommentFormProps {
   postId: string;
@@ -43,31 +44,46 @@ export default function CommentForm({ postId, token, onCommentCreated, }: Commen
 		}
 	}
 
-	return (
-		<form onSubmit={handleSubmit}>
-			<label htmlFor="comment">
-				Escreve um comentário
-			</label>
+	 return (
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div>
+        <label
+          htmlFor="comment-content"
+          className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Adicionar comentário
+        </label>
 
-			<textarea
-				id="comment"
-				value={content}
-				onChange={(event) => setContent(event.target.value)}
-				placeholder="O que achaste deste post?"
-				rows={4}
-				disabled={isSubmitting}
-			/>
+        <textarea
+          id="comment-content"
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
+          placeholder="Escreve o teu comentário..."
+          rows={4}
+          disabled={isSubmitting}
+          className="block w-full resize-y rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-indigo-400 dark:focus:ring-indigo-400/20"
+        />
+      </div>
 
-			{error && <p>{error}</p>}
+      {error && (
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
 
-			<button
-				type="submit"
-				disabled={isSubmitting || !content.trim()}
-			>
-				{isSubmitting
-					? "A publicar..."
-					: "Comentar"}
-			</button>
-		</form>
-	);
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          disabled={!content.trim() || isSubmitting}
+          className="inline-flex h-9 items-center gap-2 rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {isSubmitting ? (
+            <Loader2 size={16} className="animate-spin" />
+          ) : (
+            <Send size={16} />
+          )}
+
+          {isSubmitting ? "A publicar..." : "Comentar"}
+        </button>
+      </div>
+    </form>
+  );
 }

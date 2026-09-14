@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   Edit,
   Heart,
+  Loader2,
   MessageCircle,
   Trash2,
 } from "lucide-react";
@@ -142,12 +143,10 @@ export default function PostPage() {
         <div className="mx-auto max-w-4xl">
           <div className="animate-pulse space-y-6">
             <div className="h-4 w-32 rounded bg-gray-200 dark:bg-gray-800" />
-
             <div className="space-y-3">
               <div className="h-10 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
               <div className="h-4 w-48 rounded bg-gray-200 dark:bg-gray-800" />
             </div>
-
             <div className="space-y-4 pt-6">
               <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-800" />
               <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-800" />
@@ -165,7 +164,7 @@ export default function PostPage() {
         <div className="mx-auto max-w-4xl">
           <Link
             href="/dashboard/posts"
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
           >
             <ArrowLeft size={16} />
             Voltar aos posts
@@ -196,11 +195,10 @@ export default function PostPage() {
     <>
       <div className="px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          {/* Navigation and actions */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <Link
               href="/dashboard/posts"
-              className="inline-flex w-fit items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              className="inline-flex w-fit items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
               <ArrowLeft size={16} />
               Voltar aos posts
@@ -209,41 +207,36 @@ export default function PostPage() {
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href={`/dashboard/posts/${post.id}/edit`}
-                className="inline-flex h-9 items-center gap-2 rounded-lg border border-gray-200 px-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+                className="inline-flex h-9 items-center gap-2 rounded-lg border border-gray-200 px-3 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
               >
                 <Edit size={15} />
-                <span>Editar</span>
+                Editar
               </Link>
 
               <button
                 type="button"
                 onClick={handleTogglePublished}
                 disabled={isUpdating}
-                className={
-                  post.published
-                    ? "inline-flex h-9 items-center rounded-lg border border-gray-200 px-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-                    : "inline-flex h-9 items-center rounded-lg bg-indigo-600 px-3 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
-                }
+                className="inline-flex h-9 items-center gap-2 rounded-lg border border-gray-200 px-3 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
               >
-                {isUpdating
-                  ? "A atualizar..."
-                  : post.published
-                    ? "Despublicar"
-                    : "Publicar"}
+                {isUpdating && (
+                  <Loader2 size={15} className="animate-spin" />
+                )}
+
+                {post.published ? "Despublicar" : "Publicar"}
               </button>
 
               <button
                 type="button"
                 onClick={() => setShowDeleteDialog(true)}
                 aria-label="Eliminar post"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-gray-700 dark:text-gray-400 dark:hover:border-red-900 dark:hover:bg-red-950/40 dark:hover:text-red-400"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-gray-700 dark:text-gray-400 dark:hover:border-red-900 dark:hover:bg-red-950/40 dark:hover:text-red-400"
               >
                 <Trash2 size={16} />
               </button>
             </div>
           </div>
 
-          {/* Post header */}
           <header className="mt-8 border-b border-gray-200 pb-8 dark:border-gray-800">
             <div className="flex flex-wrap items-center gap-3">
               <span
@@ -286,12 +279,10 @@ export default function PostPage() {
             </div>
           </header>
 
-          {/* Post content */}
           <main className="mt-8">
             <PostContent content={post.content} />
           </main>
 
-          {/* Post stats */}
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-gray-200 py-5 dark:border-gray-800">
             <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
               <Heart size={17} />
@@ -310,7 +301,6 @@ export default function PostPage() {
             </div>
           </div>
 
-          {/* Comments */}
           <section className="mt-10 pb-10">
             <div className="mb-6">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -334,7 +324,7 @@ export default function PostPage() {
 
             <CommentList
               comments={comments}
-              currentUserId={currentUserId ?? 0}
+              currentUserId={currentUserId}
               isPostAuthor={isPostAuthor}
               token={token ?? ""}
               onCommentDeleted={reloadComments}
