@@ -298,3 +298,35 @@ export async function unlikePost(postId: string, token: string): Promise<void> {
     throw new Error("Failed to unlike post");
   }
 }
+
+export async function likeComment(commentId: number, token: string): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}/like`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to like comment");
+  }
+}
+
+export async function unlikeComment(commentId: number, token: string): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}/like`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to unlike comment");
+  }
+}
