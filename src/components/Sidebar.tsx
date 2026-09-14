@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import useAuthStore from "@/stores/authStore";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -47,9 +48,7 @@ export default function Sidebar() {
       </nav>
 
       <footer className="mt-auto">
-        <button type="button">
-          Alterar tema
-        </button>
+        <ThemeSwitcher />
 
         <button type="button" onClick={handleLogout}>
           Logout
