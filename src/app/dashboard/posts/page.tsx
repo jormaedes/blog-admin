@@ -14,6 +14,7 @@ export default function PostsPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [filter, setFilter] = useState<Filter>("all");
   const [isLoading, setIsLoading] = useState(true);
+  const [updatingPostId, setUpdatingPostId] = useState<number | null>(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -69,6 +70,8 @@ export default function PostsPage() {
 
       if (!token) return;
 
+      setUpdatingPostId(post.id);
+
       await togglePostPublished(
         post.id.toString(),
         !post.published,
@@ -87,8 +90,12 @@ export default function PostsPage() {
       );
     } catch (error) {
       console.error(error);
+    } finally {
+      setUpdatingPostId(null);
     }
   }
+
+  
 
   if (isLoading) {
     return (
@@ -205,6 +212,7 @@ export default function PostsPage() {
               onTogglePublished={handleTogglePublished}
               key={post.id}
               post={post}
+              isUpdating={updatingPostId === post.id}
               onDelete={handleDelete}
             />
           ))
