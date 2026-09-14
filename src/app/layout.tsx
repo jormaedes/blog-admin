@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import AuthInitializer from "@/components/AuthInitializer";
-import Header from "@/components/Header";
 import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
@@ -19,7 +18,6 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <AuthInitializer />
-          <Header />
           {children}
         </ThemeProvider>
       </body>
