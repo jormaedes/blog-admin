@@ -246,3 +246,23 @@ export async function deleteComment(commentId: number, token: string): Promise<v
     throw new Error("Failed to delete comment");
   }
 }
+
+export async function updateComment(commentId: number, content: string, token: string): Promise<Comment> {
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ content }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update comment");
+  }
+
+  return response.json();
+}

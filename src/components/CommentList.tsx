@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { deleteComment } from "@/lib/api";
+import { deleteComment, updateComment } from "@/lib/api";
 import type { Comment } from "@/types/comment";
 
 interface CommentListProps {
@@ -11,10 +11,14 @@ interface CommentListProps {
 	isPostAuthor: boolean;
 	token: string;
 	onCommentDeleted: (commentId: number) => void;
+	onCommentUpdated: (comment: Comment) => void;
 }
 
-export default function CommentList({ comments, currentUserId, isPostAuthor, token, onCommentDeleted }: CommentListProps) {
+export default function CommentList({ comments, currentUserId, isPostAuthor, token, onCommentDeleted, onCommentUpdated }: CommentListProps) {
 	const [isDeleting, setIsDeleting] = useState<number | null>(null);
+
+	const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+	const [editingContent, setEditingContent] = useState("");
 
 	async function handleDelete(commentId: number) {
 		const confirmed = window.confirm(
@@ -37,6 +41,29 @@ export default function CommentList({ comments, currentUserId, isPostAuthor, tok
 			}
 		} finally {
 			setIsDeleting(null);
+		}
+	}
+
+	async function handleUpdate(commentId: number) {
+		if (!editingContent.trim()) {
+			return;
+		}
+
+		try {
+			const updatedComment = await updateComment(
+				commentId,
+				editingContent.trim(),
+				token
+			);
+
+			onCommentUpdated(updatedComment);
+
+			setEditingCommentId(null);
+			setEditingContent("");
+		} catch (error) {
+			if (error instanceof Error) {
+				console.error(error);
+			}
 		}
 	}
 
@@ -70,7 +97,49 @@ export default function CommentList({ comments, currentUserId, isPostAuthor, tok
 								</span>
 							</div>
 
-							<p>{comment.content}</p>
+
+							{editingCommentId === comment.id ? (
+								<div>
+									<textarea
+										value={editingContent}
+										onChange={(event) =>
+											setEditingContent(event.target.value)
+										}
+										rows={3}
+									/>
+
+									<button
+										type="button"
+										onClick={() => handleUpdate(comment.id)}
+									>
+										Guardar
+									</button>
+
+									<button
+										type="button"
+										onClick={() => {
+											setEditingCommentId(null);
+											setEditingContent("");
+										}}
+									>
+										Cancelar
+									</button>
+								</div>
+							) : (
+								<p>{comment.content}</p>
+							)}
+
+							{isOwner && editingCommentId !== comment.id && (
+								<button
+									type="button"
+									onClick={() => {
+										setEditingCommentId(comment.id);
+										setEditingContent(comment.content);
+									}}
+								>
+									Editar
+								</button>
+							)}
 
 							<time dateTime={comment.timestamp}>
 								{new Date(

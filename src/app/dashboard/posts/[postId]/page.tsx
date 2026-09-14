@@ -114,6 +114,15 @@ export default function PostPage() {
                 )
               );
             }}
+            onCommentUpdated={(updatedComment) => {
+              setComments((currentComments) =>
+                currentComments.map((comment) =>
+                  comment.id === updatedComment.id
+                    ? updatedComment
+                    : comment
+                )
+              );
+            }}
           />
         )}
         <CommentForm
