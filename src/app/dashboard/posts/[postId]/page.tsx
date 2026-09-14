@@ -11,6 +11,7 @@ import type { Comment } from "@/types/comment";
 
 import PostContent from "@/components/PostContent";
 import CommentList from "@/components/CommentList";
+import CommentForm from "@/components/CommentForm";
 
 export default function PostPage() {
   const params = useParams<{ postId: string }>();
@@ -61,6 +62,11 @@ export default function PostPage() {
     return <p>Post não encontrado.</p>;
   }
 
+  const token = getToken();
+  if (!token) {
+    return <p>Authentication token not found</p>;
+  }
+
   return (
     <main>
       <article>
@@ -93,6 +99,16 @@ export default function PostPage() {
 
         <PostContent content={post.content} />
         <CommentList comments={comments} />
+        <CommentForm
+          postId={params.postId}
+          token={token}
+          onCommentCreated={(comment) => {
+            setComments((currentComments) => [
+              ...currentComments,
+              comment,
+            ]);
+          }}
+        />
       </article>
 
       <footer>

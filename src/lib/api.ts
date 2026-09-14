@@ -210,3 +210,23 @@ export async function getComments(postId: string, token: string): Promise<Commen
 
   return response.json();
 }
+
+export async function createComment(postId: string, content: string, token: string): Promise<Comment> {
+  const response = await fetch(
+    `${API_URL}/posts/${postId}/comments`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ content }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to create comment");
+  }
+
+  return response.json();
+}
