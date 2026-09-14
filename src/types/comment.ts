@@ -12,4 +12,6 @@ export interface Comment {
   userId: number;
   postId: number;
   user: CommentAuthor;
+  likesCount: number;
+  likedByMe: boolean;
 }
