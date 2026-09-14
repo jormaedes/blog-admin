@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
-import { getComments, getPost, getToken } from "@/lib/api";
+import { getComments, getPost, getToken, likePost, unlikePost } from "@/lib/api";
 import type { Post } from "@/types/post";
 import Link from "next/link";
 
@@ -24,6 +24,7 @@ export default function PostPage() {
   const [comments, setComments] = useState<Comment[]>([]);
   const user = useAuthStore((state) => state.user);
 
+  const [isLiking, setIsLiking] = useState(false);
 
   useEffect(() => {
     async function loadPost() {
@@ -52,6 +53,48 @@ export default function PostPage() {
 
     loadPost();
   }, [params.postId]);
+
+  async function handleToggleLike() {
+    if (!post || !token) {
+      return;
+    }
+
+    try {
+      setIsLiking(true);
+
+      if (post.likedByMe) {
+        await unlikePost(String(post.id), token);
+
+        setPost((currentPost) =>
+          currentPost
+            ? {
+              ...currentPost,
+              likedByMe: false,
+              likesCount: currentPost.likesCount - 1,
+            }
+            : null
+        );
+      } else {
+        await likePost(String(post.id), token);
+
+        setPost((currentPost) =>
+          currentPost
+            ? {
+              ...currentPost,
+              likedByMe: true,
+              likesCount: currentPost.likesCount + 1,
+            }
+            : null
+        );
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    } finally {
+      setIsLiking(false);
+    }
+  }
 
   if (isLoading) {
     return <p>A carregar post...</p>;
@@ -101,6 +144,16 @@ export default function PostPage() {
         </header>
 
         <PostContent content={post.content} />
+        <div>
+          <button
+            type="button"
+            onClick={handleToggleLike}
+            disabled={isLiking}
+          >
+            {post.likedByMe ? "❤️" : "♡"}{" "}
+            {post.likesCount}
+          </button>
+        </div>
         {user && (
           <CommentList
             comments={comments}
