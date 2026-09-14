@@ -139,9 +139,8 @@ export default function PostsPage() {
 
       {posts.map((post) => (
         <article key={post.id}>
-          <h2><Link href={`/dashboard/posts/${post.id}`}>
-            {post.title}
-          </Link></h2>
+          <h2>
+            {post.title}</h2>
 
           <p>{formatDate(post.timestamp)}</p>
 
@@ -153,6 +152,9 @@ export default function PostsPage() {
 
           {user?.userType === "AUTHOR" && (
             <div>
+              <Link href={`/dashboard/posts/${post.id}`}>
+                Ver
+              </Link>
               <Link href={`/dashboard/posts/${post.id}/edit`}>
                 Editar
               </Link>
