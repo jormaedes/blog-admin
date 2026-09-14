@@ -140,6 +140,7 @@ export default function PostsPage() {
         <PostCard
           key={post.id}
           post={post}
+          isAuthor={user?.userType === "AUTHOR"}
           isDeleting={isDeleting === post.id}
           isPublishing={isPublishing === post.id}
           onDelete={handleDelete}
