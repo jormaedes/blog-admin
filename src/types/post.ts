@@ -13,5 +13,6 @@ export interface Post {
 	authorId: number;
 	author: PostAuthor;
 	likesCount: number;
+	commentsCount: number;
 	likedByMe: boolean;
 }
