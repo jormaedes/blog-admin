@@ -15,7 +15,7 @@ export async function login(
     },
     body: JSON.stringify({
       username,
-      password,
+      password
     }),
   });
 
@@ -23,7 +23,15 @@ export async function login(
     throw new Error("Invalid credentials");
   }
 
-  return response.json();
+  const data: LoginResponse = await response.json();
+
+  if (data.user.userType !== "AUTHOR") {
+    throw new Error(
+      "Only authors can access the admin application"
+    );
+  }
+
+  return data;
 }
 
 export function getToken(): string | null {
