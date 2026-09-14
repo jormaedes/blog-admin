@@ -163,20 +163,20 @@ export default function DashboardPage() {
           </div>
 
           <div className="rounded-xl border border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-900">
-           {recentComments.length === 0 ? (
-  <div className="px-4 py-10 text-center">
-    <p className="text-sm text-gray-500 dark:text-gray-400">
-      Ainda não existem comentários.
-    </p>
-  </div>
-) : (
-  recentComments.map((comment) => (
-    <RecentCommentItem
-      key={comment.id}
-      comment={comment}
-    />
-  ))
-)}
+            {recentComments.length === 0 ? (
+              <div className="px-4 py-10 text-center">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Ainda não existem comentários.
+                </p>
+              </div>
+            ) : (
+              recentComments.map((comment) => (
+                <RecentCommentItem
+                  key={comment.id}
+                  comment={comment}
+                />
+              ))
+            )}
           </div>
         </section>
       </div>
