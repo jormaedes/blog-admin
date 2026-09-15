@@ -14,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
+    <html lang="pt" suppressHydrationWarning>
+      <body className="min-h-screen bg-[#F8F9FB] text-[#17191C] antialiased dark:bg-[#0F1115] dark:text-[#F1F3F5]">
         <ThemeProvider>
           <AuthInitializer />
           {children}
