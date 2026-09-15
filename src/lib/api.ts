@@ -2,7 +2,7 @@ import type { LoginResponse, User } from "@/types/auth";
 import type { Post } from "@/types/post";
 import type { Comment, RecentComment } from "@/types/comment";
 
-const API_URL = "http://localhost:3300";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function login(
   username: string,
