@@ -149,12 +149,6 @@ Run the development server:
 npm run dev
 ```
 
-Run the linter:
-
-```
-npm run lint
-```
-
 Create a production build:
 
 ```bash
