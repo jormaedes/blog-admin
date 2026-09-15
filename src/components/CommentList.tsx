@@ -119,7 +119,7 @@ export default function CommentList({
 
       onCommentUpdated();
     } catch (error) {
-      console.error(error);
+      console.error("ERRO NO LIKE:", error);
     } finally {
       setLikingCommentId(null);
     }

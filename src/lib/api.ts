@@ -241,7 +241,7 @@ export async function createComment(postId: string, content: string, token: stri
 
 export async function deleteComment(commentId: number, token: string): Promise<void> {
   const response = await fetch(
-    `${API_URL}/comments/${commentId}`,
+    `${API_URL}/comments/${commentId}/`,
     {
       method: "DELETE",
       headers: {
