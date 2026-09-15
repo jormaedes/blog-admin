@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+"use client";
+
+import { ReactNode, useState } from "react";
 
 import AuthGuard from "@/components/AuthGuard";
 import Sidebar from "@/components/Sidebar";
@@ -11,13 +13,20 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <AuthGuard>
       <div className="flex min-h-screen">
-        <Sidebar />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
 
-        <div className="ml-64 flex min-w-0 flex-1 flex-col">
-          <Header />
+        <div className="flex min-w-0 flex-1 flex-col lg:ml-64">
+          <Header
+            onMenuClick={() => setIsSidebarOpen(true)}
+          />
 
           <main className="flex-1">
             {children}
