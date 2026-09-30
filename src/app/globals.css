@@ -25,13 +25,15 @@ body {
   color: #d1d5db !important;
 }
 
-.dark .post-content :is(h1, h2, h3, h4, h5, h6):is([style*="color" i], [color]),
-.dark .post-content :is(h1, h2, h3, h4, h5, h6) :is([style*="color" i], [color]) {
+.dark .post-content :is(h1, h2, h3, h4, h5, h6, strong, b),
+.dark .post-content :is(h1, h2, h3, h4, h5, h6, strong, b):is([style*="color" i], [color]),
+.dark .post-content :is(h1, h2, h3, h4, h5, h6, strong, b) :is([style*="color" i], [color]) {
   color: #f0f0eb !important;
 }
 
 .dark .post-content a,
 .dark .post-content a:is([style*="color" i], [color]),
-.dark .post-content a :is([style*="color" i], [color]) {
+.dark .post-content a :is([style*="color" i], [color]),
+.dark .post-content a :is(strong, b) {
   color: #df8064 !important;
 }
