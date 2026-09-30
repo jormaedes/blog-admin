@@ -71,7 +71,7 @@ export default function DashboardPage() {
   return (
     <div className="p-6">
       <div className="mb-8">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+        <h2 className="font-serif text-2xl text-gray-950 dark:text-white">
           Olá, {user?.firstName}
         </h2>
 
@@ -110,7 +110,7 @@ export default function DashboardPage() {
         <section>
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <h2 className="font-serif text-xl text-gray-950 dark:text-white">
                 Posts recentes
               </h2>
 
@@ -121,13 +121,13 @@ export default function DashboardPage() {
 
             <Link
               href="/dashboard/posts"
-              className="text-sm font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
+              className="text-sm font-medium text-[#a5452e] hover:text-[#853b29] dark:text-[#df8064] dark:hover:text-[#f0987c]"
             >
               Ver todos
             </Link>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-md border border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-[#1b1e1b]">
             {posts.length === 0 ? (
               <div className="px-4 py-10 text-center">
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -145,7 +145,7 @@ export default function DashboardPage() {
         <section>
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <h2 className="font-serif text-xl text-gray-950 dark:text-white">
                 Comentários recentes
               </h2>
 
@@ -156,13 +156,13 @@ export default function DashboardPage() {
 
             <Link
               href="/dashboard/posts"
-              className="text-sm font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
+              className="text-sm font-medium text-[#a5452e] hover:text-[#853b29] dark:text-[#df8064] dark:hover:text-[#f0987c]"
             >
               Ver posts
             </Link>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-md border border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-[#1b1e1b]">
             {recentComments.length === 0 ? (
               <div className="px-4 py-10 text-center">
                 <p className="text-sm text-gray-500 dark:text-gray-400">

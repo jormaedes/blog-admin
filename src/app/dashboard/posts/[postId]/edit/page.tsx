@@ -157,13 +157,13 @@ export default function EditPostPage() {
 
   if (isLoading) {
     return (
-      <main className="min-h-full bg-gray-50/50 dark:bg-gray-950">
+      <main className="min-h-full bg-[#FAF9F6] dark:bg-[#141614]">
         <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="animate-pulse">
             <div className="mb-6 h-4 w-16 rounded bg-gray-200 dark:bg-gray-800" />
 
             <div className="mb-6 flex items-start gap-4">
-              <div className="h-11 w-11 rounded-xl bg-gray-200 dark:bg-gray-800" />
+              <div className="h-11 w-11 rounded-md bg-gray-200 dark:bg-gray-800" />
 
               <div className="space-y-2">
                 <div className="h-7 w-40 rounded bg-gray-200 dark:bg-gray-800" />
@@ -171,7 +171,7 @@ export default function EditPostPage() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div className="overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#1b1e1b]">
               <div className="border-b border-gray-200 p-6 dark:border-gray-800">
                 <div className="h-4 w-16 rounded bg-gray-200 dark:bg-gray-800" />
                 <div className="mt-4 h-12 w-full rounded bg-gray-200 dark:bg-gray-800" />
@@ -190,9 +190,9 @@ export default function EditPostPage() {
 
   if (error && !post) {
     return (
-      <main className="min-h-full bg-gray-50/50 dark:bg-gray-950">
+      <main className="min-h-full bg-[#FAF9F6] dark:bg-[#141614]">
         <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="rounded-xl border border-red-200 bg-red-50 p-6 dark:border-red-950/50 dark:bg-red-950/20">
+          <div className="rounded-md border border-red-200 bg-red-50 p-6 dark:border-red-950/50 dark:bg-red-950/20">
             <p className="text-sm font-medium text-red-600 dark:text-red-400">
               {error}
             </p>
@@ -204,7 +204,7 @@ export default function EditPostPage() {
 
   if (!post) {
     return (
-      <main className="min-h-full bg-gray-50/50 dark:bg-gray-950">
+      <main className="min-h-full bg-[#FAF9F6] dark:bg-[#141614]">
         <div className="mx-auto max-w-5xl px-4 py-12 text-center sm:px-6 lg:px-8">
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Post não encontrado.
@@ -216,7 +216,7 @@ export default function EditPostPage() {
 
   return (
     <AuthorGuard>
-      <main className="min-h-full bg-gray-50/50 dark:bg-gray-950">
+      <main className="min-h-full bg-[#FAF9F6] dark:bg-[#141614]">
         <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="mb-6">
             <button
@@ -234,15 +234,15 @@ export default function EditPostPage() {
 
             <div className="flex items-start justify-between gap-4">
               <div className="flex min-w-0 items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/50">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[#f8eee9] dark:bg-[#38251f]">
                   <FileText
                     size={20}
-                    className="text-indigo-600 dark:text-indigo-400"
+                    className="text-[#a5452e] dark:text-[#df8064]"
                   />
                 </div>
 
                 <div className="min-w-0">
-                  <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                  <h1 className="font-serif text-2xl text-gray-950 dark:text-white">
                     Editar post
                   </h1>
 
@@ -255,8 +255,8 @@ export default function EditPostPage() {
               <span
                 className={
                   post.published
-                    ? "inline-flex shrink-0 items-center gap-1.5 rounded-full bg-green-50 px-3 py-1.5 text-xs font-medium text-green-700 dark:bg-green-950/40 dark:text-green-400"
-                    : "inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                    ? "inline-flex shrink-0 items-center gap-1.5 rounded-md bg-[#f8eee9] px-3 py-1.5 text-xs font-medium text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]"
+                    : "inline-flex shrink-0 items-center gap-1.5 rounded-md bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
                 }
               >
                 <span
@@ -273,7 +273,7 @@ export default function EditPostPage() {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div className="overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#1b1e1b]">
               <div className="border-b border-gray-200 px-6 py-5 dark:border-gray-800">
                 <label
                   htmlFor="title"
@@ -294,7 +294,7 @@ export default function EditPostPage() {
                   }}
                   placeholder="Título do post..."
                   disabled={isSaving}
-                  className="mt-2 h-12 w-full border-0 bg-transparent px-0 text-2xl font-semibold tracking-tight text-gray-900 outline-none placeholder:text-gray-300 focus:ring-0 dark:text-white dark:placeholder:text-gray-600"
+                  className="mt-2 h-12 w-full border-0 bg-transparent px-0 font-serif text-2xl text-gray-950 outline-none placeholder:text-gray-300 focus:ring-0 dark:text-white dark:placeholder:text-gray-600"
                 />
               </div>
 
@@ -338,7 +338,7 @@ export default function EditPostPage() {
                         "alignleft aligncenter alignright | " +
                         "bullist numlist | link image | code",
                       content_style:
-                        "body { font-family: Inter, Arial, sans-serif; font-size: 16px; line-height: 1.7; padding: 8px 12px; }",
+                        "body { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 16px; line-height: 1.7; padding: 8px 12px; }",
                     }}
                   />
                 </div>
@@ -365,7 +365,7 @@ export default function EditPostPage() {
                 </div>
               )}
 
-              <div className="border-t border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-800 dark:bg-gray-950/40">
+              <div className="border-t border-gray-200 bg-[#f5f4ef] px-6 py-4 dark:border-gray-800 dark:bg-[#191c19]">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
@@ -388,7 +388,7 @@ export default function EditPostPage() {
                         )
                       }
                       disabled={isSaving || isPublishing}
-                      className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 text-sm font-medium text-gray-700 transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                      className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-gray-200 px-4 text-sm font-medium text-gray-700 transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
                     >
                       <X size={16} />
                       Cancelar
@@ -400,8 +400,8 @@ export default function EditPostPage() {
                       disabled={isPublishing || isSaving}
                       className={
                         post.published
-                          ? "inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 text-sm font-medium text-gray-700 transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-                          : "inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-indigo-200 px-4 text-sm font-medium text-indigo-700 transition-colors hover:bg-indigo-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-indigo-900 dark:text-indigo-300 dark:hover:bg-indigo-950/50"
+                          ? "inline-flex h-10 items-center justify-center gap-2 rounded-md border border-gray-200 px-4 text-sm font-medium text-gray-700 transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                          : "inline-flex h-10 items-center justify-center gap-2 rounded-md border border-[#c2573a]/30 px-4 text-sm font-medium text-[#a5452e] transition-colors hover:bg-[#f8eee9] disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#df8064]/30 dark:text-[#df8064] dark:hover:bg-[#38251f]"
                       }
                     >
                       {isPublishing ? (
@@ -425,7 +425,7 @@ export default function EditPostPage() {
                     <button
                       type="submit"
                       disabled={isSaving || isPublishing}
-                      className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#c2573a] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#a5452e] disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {isSaving ? (
                         <Loader2

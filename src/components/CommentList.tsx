@@ -130,7 +130,7 @@ export default function CommentList({
 
   if (comments.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-gray-200 px-6 py-10 text-center dark:border-gray-800">
+      <div className="rounded-md border border-dashed border-gray-200 px-6 py-10 text-center dark:border-gray-800">
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Ainda não existem comentários neste post.
         </p>
@@ -161,7 +161,7 @@ export default function CommentList({
               className="border-b border-gray-100 pb-6 last:border-b-0 dark:border-gray-800"
             >
               <div className="flex gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-semibold text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#f8eee9] text-xs font-semibold text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]">
                   {initials}
                 </div>
 
@@ -203,7 +203,7 @@ export default function CommentList({
                         }
                         rows={3}
                         disabled={isSaving}
-                        className="w-full resize-none rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
+                        className="w-full resize-none rounded-md border border-gray-300/80 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                       />
 
                       <div className="mt-2 flex items-center gap-2">
@@ -211,7 +211,7 @@ export default function CommentList({
                           type="button"
                           onClick={() => handleUpdate(comment.id)}
                           disabled={isSaving || !editingContent.trim()}
-                          className="inline-flex h-8 items-center gap-1.5 rounded-md bg-indigo-600 px-3 text-xs font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="inline-flex h-8 items-center gap-1.5 rounded-md bg-[#c2573a] px-3 text-xs font-medium text-white transition-colors hover:bg-[#a5452e] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {isSaving ? (
                             <Loader2
@@ -237,7 +237,7 @@ export default function CommentList({
                       </div>
                     </div>
                   ) : (
-                    <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-6 text-gray-700 dark:text-gray-300">
+                    <p className="mt-2 whitespace-pre-wrap wrap-break-word text-sm leading-6 text-gray-700 dark:text-gray-300">
                       {comment.content}
                     </p>
                   )}

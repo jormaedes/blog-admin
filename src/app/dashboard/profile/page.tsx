@@ -164,7 +164,7 @@ export default function ProfilePage() {
         <div className="mx-auto max-w-4xl animate-pulse">
           <div className="h-8 w-32 rounded-lg bg-gray-200 dark:bg-gray-800" />
 
-          <div className="mt-8 rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+          <div className="mt-8 rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#1b1e1b]">
             <div className="h-36 border-b border-gray-200 dark:border-gray-800" />
 
             <div className="space-y-5 p-6">
@@ -188,7 +188,7 @@ export default function ProfilePage() {
     <div className="px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+          <h1 className="font-serif text-2xl text-gray-950 dark:text-white">
             Perfil
           </h1>
 
@@ -197,10 +197,10 @@ export default function ProfilePage() {
           </p>
         </div>
 
-        <div className="mt-8 overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div className="mt-8 overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#1b1e1b]">
           <div className="border-b border-gray-200 px-6 py-6 dark:border-gray-800">
             <div className="flex items-center gap-4">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-lg font-semibold text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#f8eee9] text-lg font-semibold text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]">
                 {initials}
               </div>
 
@@ -213,7 +213,7 @@ export default function ProfilePage() {
                   @{user?.username}
                 </p>
 
-                <div className="mt-2 inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300">
+                <div className="mt-2 inline-flex items-center rounded-md bg-[#f8eee9] px-2.5 py-1 text-xs font-medium text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]">
                   {user?.userType === "AUTHOR"
                     ? "Autor"
                     : "Leitor"}
@@ -263,7 +263,7 @@ export default function ProfilePage() {
                       )
                     }
                     disabled={isSaving}
-                    className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
+                    className="h-10 w-full rounded-md border border-gray-300/80 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                   />
                 </div>
 
@@ -286,7 +286,7 @@ export default function ProfilePage() {
                       )
                     }
                     disabled={isSaving}
-                    className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
+                    className="h-10 w-full rounded-md border border-gray-300/80 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                   />
                 </div>
 
@@ -309,7 +309,7 @@ export default function ProfilePage() {
                       )
                     }
                     disabled={isSaving}
-                    className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
+                    className="h-10 w-full rounded-md border border-gray-300/80 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                   />
                 </div>
               </div>
@@ -355,7 +355,7 @@ export default function ProfilePage() {
                     }}
                     disabled={isSaving}
                     placeholder="••••••••"
-                    className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
+                    className="h-10 w-full rounded-md border border-gray-300/80 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                   />
                 </div>
 
@@ -378,7 +378,7 @@ export default function ProfilePage() {
                     }}
                     disabled={isSaving}
                     placeholder="••••••••"
-                    className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
+                    className="h-10 w-full rounded-md border border-gray-300/80 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                   />
                 </div>
               </div>
@@ -401,11 +401,11 @@ export default function ProfilePage() {
               </div>
             )}
 
-            <div className="flex justify-end border-t border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-800 dark:bg-gray-950/40">
+            <div className="flex justify-end border-t border-gray-200 bg-[#f5f4ef] px-6 py-4 dark:border-gray-800 dark:bg-[#191c19]">
               <button
                 type="submit"
                 disabled={isSaving}
-                className="inline-flex h-10 items-center gap-2 rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex h-10 items-center gap-2 rounded-md bg-[#c2573a] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#a5452e] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSaving && (
                   <Loader2

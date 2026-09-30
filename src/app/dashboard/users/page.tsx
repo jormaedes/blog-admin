@@ -79,7 +79,7 @@ export default function UsersPage() {
     <div className="px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+          <h1 className="font-serif text-2xl text-gray-950 dark:text-white">
             Utilizadores
           </h1>
 
@@ -90,7 +90,7 @@ export default function UsersPage() {
 
         {!isLoading && !errorMessage && (
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+            <div className="rounded-md border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-[#1b1e1b]">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -111,7 +111,7 @@ export default function UsersPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+            <div className="rounded-md border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-[#1b1e1b]">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -123,16 +123,16 @@ export default function UsersPage() {
                   </p>
                 </div>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950/50">
+                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#f8eee9] dark:bg-[#38251f]">
                   <UserRound
                     size={19}
-                    className="text-indigo-600 dark:text-indigo-400"
+                    className="text-[#a5452e] dark:text-[#df8064]"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+            <div className="rounded-md border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-[#1b1e1b]">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -155,10 +155,10 @@ export default function UsersPage() {
           </div>
         )}
 
-        <div className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div className="mt-6 overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#1b1e1b]">
           <div className="flex flex-col gap-4 border-b border-gray-200 p-5 sm:flex-row sm:items-center sm:justify-between dark:border-gray-800">
             <div>
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
+              <h2 className="font-serif text-lg text-gray-950 dark:text-white">
                 Todos os utilizadores
               </h2>
 
@@ -185,7 +185,7 @@ export default function UsersPage() {
                   setSearch(event.target.value)
                 }
                 placeholder="Pesquisar utilizadores..."
-                className="h-10 w-full rounded-lg border border-gray-200 bg-white pl-9 pr-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
+                className="h-10 w-full rounded-md border border-gray-300/80 bg-white pl-9 pr-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
               />
             </div>
           </div>
@@ -238,7 +238,7 @@ export default function UsersPage() {
                   key={user.id}
                   className="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-950/40"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f8eee9] text-sm font-semibold text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]">
                     {getInitials(user)}
                   </div>
 
@@ -256,8 +256,8 @@ export default function UsersPage() {
                     <span
                       className={
                         user.userType === "AUTHOR"
-                          ? "inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300"
-                          : "inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                          ? "inline-flex items-center rounded-md bg-[#f8eee9] px-2.5 py-1 text-xs font-medium text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]"
+                          : "inline-flex items-center rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
                       }
                     >
                       {user.userType === "AUTHOR"

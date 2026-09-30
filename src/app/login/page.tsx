@@ -43,44 +43,42 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F8F9FB] dark:bg-[#0F1115]">
+    <main className="min-h-screen bg-[#FAF9F6] dark:bg-[#141614]">
       <div className="flex min-h-screen">
         {/* Visual */}
-        <section className="relative hidden overflow-hidden bg-[#111827] lg:flex lg:w-1/2">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.22),transparent_35%),radial-gradient(circle_at_80%_80%,rgba(79,70,229,0.16),transparent_35%)]" />
-
-          <div className="relative z-10 flex w-full flex-col justify-between p-10 xl:p-14">
+        <section className="hidden bg-[#e9e9e2] lg:flex lg:w-1/2 dark:bg-[#20231f]">
+          <div className="flex w-full flex-col justify-between p-10 xl:p-14">
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-950/30">
+                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#c2573a] text-white">
                   <span className="text-lg font-bold">B</span>
                 </div>
 
-                <span className="text-lg font-semibold text-white">
+                <span className="font-serif text-xl text-gray-950 dark:text-white">
                   Blog Admin
                 </span>
               </div>
             </div>
 
             <div className="max-w-xl">
-              <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-indigo-300">
+              <p className="mb-4 text-xs font-semibold uppercase text-[#a5452e] dark:text-[#df8064]">
                 Administration
               </p>
 
-              <h2 className="text-4xl font-semibold leading-tight tracking-tight text-white xl:text-5xl">
+              <h2 className="font-serif text-4xl leading-tight text-gray-950 xl:text-5xl dark:text-white">
                 Gere o teu conteúdo
                 <br />
                 de forma simples.
               </h2>
 
-              <p className="mt-6 max-w-md text-base leading-7 text-gray-400">
+              <p className="mt-6 max-w-md text-base leading-7 text-gray-600 dark:text-gray-400">
                 Cria, edita e publica os teus artigos num único
                 espaço, com tudo o que precisas para gerir o teu blog.
               </p>
             </div>
 
             <div>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Blog Administration Platform
               </p>
             </div>
@@ -92,18 +90,18 @@ export default function LoginPage() {
           <div className="w-full max-w-md">
             <div className="mb-10 lg:hidden">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#c2573a] text-white">
                   <span className="text-lg font-bold">B</span>
                 </div>
 
-                <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                <span className="font-serif text-xl text-gray-950 dark:text-white">
                   Blog Admin
                 </span>
               </div>
             </div>
 
             <div className="mb-8">
-              <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              <h1 className="font-serif text-3xl text-gray-950 dark:text-white">
                 Bem-vindo de volta
               </h1>
 
@@ -144,7 +142,7 @@ export default function LoginPage() {
                     }}
                     placeholder="O teu username"
                     disabled={isLoading}
-                    className="h-11 w-full rounded-lg border border-gray-200 bg-white pl-10 pr-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-600 dark:focus:border-indigo-400"
+                    className="h-11 w-full rounded-md border border-gray-300/80 bg-white pl-10 pr-4 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                   />
                 </div>
               </div>
@@ -179,13 +177,13 @@ export default function LoginPage() {
                     }}
                     placeholder="A tua password"
                     disabled={isLoading}
-                    className="h-11 w-full rounded-lg border border-gray-200 bg-white pl-10 pr-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-600 dark:focus:border-indigo-400"
+                    className="h-11 w-full rounded-md border border-gray-300/80 bg-white pl-10 pr-4 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-700 dark:bg-[#1b1e1b] dark:text-white dark:placeholder:text-gray-500 dark:focus:border-[#df8064]"
                   />
                 </div>
               </div>
 
               {error && (
-                <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 dark:border-red-950/50 dark:bg-red-950/30">
+                <div className="border-l-2 border-red-600 bg-red-50 px-4 py-3 dark:border-red-400 dark:bg-red-950/30">
                   <p className="text-sm font-medium text-red-600 dark:text-red-400">
                     {error}
                   </p>
@@ -195,7 +193,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+                className="group flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-[#c2573a] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#a5452e] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <span>
                   {isLoading ? "A iniciar sessão..." : "Iniciar sessão"}

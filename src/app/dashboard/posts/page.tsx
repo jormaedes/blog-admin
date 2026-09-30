@@ -122,7 +122,7 @@ export default function PostsPage() {
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+          <h2 className="font-serif text-2xl text-gray-950 dark:text-white">
             Posts
           </h2>
 
@@ -133,7 +133,7 @@ export default function PostsPage() {
 
         <Link
           href="/dashboard/posts/new"
-          className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700"
+          className="inline-flex items-center gap-2 rounded-md bg-[#c2573a] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#a5452e]"
         >
           <PenLine size={16} />
           Escrever post
@@ -146,7 +146,7 @@ export default function PostsPage() {
           type="button"
           onClick={() => setFilter("all")}
           className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${filter === "all"
-            ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+            ? "border-[#c2573a] text-[#a5452e] dark:border-[#df8064] dark:text-[#df8064]"
             : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             }`}
         >
@@ -157,7 +157,7 @@ export default function PostsPage() {
           type="button"
           onClick={() => setFilter("published")}
           className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${filter === "published"
-            ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+            ? "border-[#c2573a] text-[#a5452e] dark:border-[#df8064] dark:text-[#df8064]"
             : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             }`}
         >
@@ -168,7 +168,7 @@ export default function PostsPage() {
           type="button"
           onClick={() => setFilter("drafts")}
           className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${filter === "drafts"
-            ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+            ? "border-[#c2573a] text-[#a5452e] dark:border-[#df8064] dark:text-[#df8064]"
             : "border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             }`}
         >
@@ -183,7 +183,7 @@ export default function PostsPage() {
           {filteredPosts.length === 1 ? "post" : "posts"}
         </p>
       </div>
-      <div className="mt-3 overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+      <div className="mt-3 overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#1b1e1b]">
         <div className="hidden items-center gap-4 border-b border-gray-200 px-4 py-3 text-xs font-medium uppercase tracking-wide text-gray-400 dark:border-gray-800 md:flex">
           <div className="min-w-0 flex-1">
             Post

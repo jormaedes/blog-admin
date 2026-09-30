@@ -11,11 +11,11 @@ export default function PostListItem({
 	return (
 		<Link
 			href={`/dashboard/posts/${post.id}`}
-			className="block rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50"
+			className="block rounded-md p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50"
 		>
 			<div className="flex items-start justify-between gap-4">
 				<div className="min-w-0">
-					<h3 className="truncate text-sm font-medium text-gray-900 dark:text-white">
+					<h3 className="truncate font-serif text-base text-gray-950 dark:text-white">
 						{post.title}
 					</h3>
 
@@ -27,8 +27,8 @@ export default function PostListItem({
 				<span
 					className={
 						post.published
-							? "shrink-0 rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 dark:bg-green-950/40 dark:text-green-400"
-							: "shrink-0 rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+							? "shrink-0 rounded-md bg-[#f8eee9] px-2 py-1 text-xs font-medium text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]"
+							: "shrink-0 rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400"
 					}
 				>
 					{post.published ? "Publicado" : "Rascunho"}

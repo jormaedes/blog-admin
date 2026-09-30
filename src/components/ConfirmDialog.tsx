@@ -39,7 +39,7 @@ export default function ConfirmDialog({
 				aria-modal="true"
 				aria-labelledby="confirm-dialog-title"
 				aria-describedby="confirm-dialog-description"
-				className="w-full max-w-md rounded-xl border border-gray-200 bg-white shadow-xl dark:border-gray-800 dark:bg-gray-900"
+				className="w-full max-w-md rounded-md border border-gray-200 bg-[#FAF9F6] dark:border-gray-800 dark:bg-[#1b1e1b]"
 			>
 				<div className="flex items-start justify-between gap-4 p-6">
 					<div className="flex min-w-0 gap-4">
@@ -53,7 +53,7 @@ export default function ConfirmDialog({
 						<div>
 							<h2
 								id="confirm-dialog-title"
-								className="text-base font-semibold text-gray-900 dark:text-white"
+								className="font-serif text-lg text-gray-950 dark:text-white"
 							>
 								{title}
 							</h2>
@@ -83,7 +83,7 @@ export default function ConfirmDialog({
 						type="button"
 						onClick={onCancel}
 						disabled={isLoading}
-						className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+						className="rounded-md border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
 					>
 						{cancelLabel}
 					</button>
@@ -92,7 +92,7 @@ export default function ConfirmDialog({
 						type="button"
 						onClick={onConfirm}
 						disabled={isLoading}
-						className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
+						className="flex items-center gap-2 rounded-md bg-[#c2573a] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#a5452e] disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						{isLoading && <Loader2 size={16} className="animate-spin" />}
 						{isLoading ? "A eliminar..." : confirmLabel}

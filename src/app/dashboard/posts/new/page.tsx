@@ -71,7 +71,7 @@ export default function NewPostPage() {
 
   return (
     <AuthorGuard>
-      <main className="min-h-full bg-gray-50/50 dark:bg-gray-950">
+      <main className="min-h-full bg-[#FAF9F6] dark:bg-[#141614]">
         <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="mb-6">
             <button
@@ -84,15 +84,15 @@ export default function NewPostPage() {
             </button>
 
             <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/50">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[#f8eee9] dark:bg-[#38251f]">
                 <FileText
                   size={20}
-                  className="text-indigo-600 dark:text-indigo-400"
+                  className="text-[#a5452e] dark:text-[#df8064]"
                 />
               </div>
 
               <div>
-                <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                <h1 className="font-serif text-2xl text-gray-950 dark:text-white">
                   Escrever post
                 </h1>
 
@@ -104,7 +104,7 @@ export default function NewPostPage() {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div className="overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#1b1e1b]">
               <div className="border-b border-gray-200 px-6 py-5 dark:border-gray-800">
                 <label
                   htmlFor="title"
@@ -124,7 +124,7 @@ export default function NewPostPage() {
                   }}
                   placeholder="Escreve o título do teu post..."
                   disabled={isSaving}
-                  className="mt-2 h-12 w-full border-0 bg-transparent px-0 text-2xl font-semibold tracking-tight text-gray-900 outline-none placeholder:text-gray-300 focus:ring-0 dark:text-white dark:placeholder:text-gray-600"
+                  className="mt-2 h-12 w-full border-0 bg-transparent px-0 font-serif text-2xl text-gray-950 outline-none placeholder:text-gray-300 focus:ring-0 dark:text-white dark:placeholder:text-gray-600"
                 />
               </div>
 
@@ -167,7 +167,7 @@ export default function NewPostPage() {
                         "alignleft aligncenter alignright | " +
                         "bullist numlist | link image | code",
                       content_style:
-                        "body { font-family: Inter, Arial, sans-serif; font-size: 16px; line-height: 1.7; padding: 8px 12px; }",
+                        "body { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 16px; line-height: 1.7; padding: 8px 12px; }",
                     }}
                   />
                 </div>
@@ -183,7 +183,7 @@ export default function NewPostPage() {
                         setPublished(event.target.checked)
                       }
                       disabled={isSaving}
-                      className="mt-0.5 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500/20 dark:border-gray-600 dark:bg-gray-800"
+                      className="mt-0.5 h-4 w-4 rounded border-gray-300 text-[#c2573a] focus:ring-2 focus:ring-[#c2573a]/20 dark:border-gray-600 dark:bg-gray-800"
                     />
 
                     <span>
@@ -212,7 +212,7 @@ export default function NewPostPage() {
                     <button
                       type="submit"
                       disabled={isSaving}
-                      className="inline-flex h-10 items-center gap-2 rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="inline-flex h-10 items-center gap-2 rounded-md bg-[#c2573a] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#a5452e] disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {isSaving ? (
                         <>

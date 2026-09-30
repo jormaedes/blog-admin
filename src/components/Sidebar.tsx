@@ -81,9 +81,9 @@ export default function Sidebar({
       <aside
         className={`
           fixed inset-y-0 left-0 z-50 flex w-64 flex-col
-          border-r border-gray-200 bg-white
+          border-r border-gray-200 bg-[#FAF9F6]
           transition-transform duration-200 ease-in-out
-          dark:border-gray-800 dark:bg-gray-950
+          dark:border-gray-800 dark:bg-[#141614]
           lg:translate-x-0
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
         `}
@@ -93,7 +93,7 @@ export default function Sidebar({
             <Link
               href="/dashboard"
               onClick={onClose}
-              className="text-lg font-semibold text-gray-900 dark:text-white"
+              className="font-serif text-xl text-gray-950 transition-colors hover:text-[#a5452e] dark:text-white dark:hover:text-[#df8064]"
             >
               Blog Admin
             </Link>
@@ -134,7 +134,7 @@ export default function Sidebar({
                         flex items-center gap-3 rounded-lg px-3 py-2
                         text-sm font-medium transition-colors
                         ${isActive
-                          ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400"
+                          ? "bg-[#f8eee9] text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]"
                           : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-900 dark:hover:text-white"
                         }
                       `}

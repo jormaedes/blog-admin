@@ -224,7 +224,7 @@ export default function PostPage() {
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href={`/dashboard/posts/${post.id}/edit`}
-                className="inline-flex h-9 items-center gap-2 rounded-lg border border-gray-200 px-3 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                className="inline-flex h-9 items-center gap-2 rounded-md border border-gray-200 px-3 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
               >
                 <Edit size={15} />
                 Editar
@@ -234,7 +234,7 @@ export default function PostPage() {
                 type="button"
                 onClick={handleTogglePublished}
                 disabled={isUpdating}
-                className="inline-flex h-9 items-center gap-2 rounded-lg border border-gray-200 px-3 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                className="inline-flex h-9 items-center gap-2 rounded-md border border-gray-200 px-3 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
               >
                 {isUpdating && (
                   <Loader2 size={15} className="animate-spin" />
@@ -247,7 +247,7 @@ export default function PostPage() {
                 type="button"
                 onClick={() => setShowDeleteDialog(true)}
                 aria-label="Eliminar post"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-gray-700 dark:text-gray-400 dark:hover:border-red-900 dark:hover:bg-red-950/40 dark:hover:text-red-400"
+                className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 text-gray-500 hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-gray-700 dark:text-gray-400 dark:hover:border-red-900 dark:hover:bg-red-950/40 dark:hover:text-red-400"
               >
                 <Trash2 size={16} />
               </button>
@@ -259,8 +259,8 @@ export default function PostPage() {
               <span
                 className={
                   post.published
-                    ? "rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-950/40 dark:text-green-400"
-                    : "rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                    ? "rounded-md bg-[#f8eee9] px-2.5 py-1 text-xs font-medium text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]"
+                    : "rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400"
                 }
               >
                 {post.published ? "Publicado" : "Rascunho"}
@@ -275,12 +275,12 @@ export default function PostPage() {
               </span>
             </div>
 
-            <h1 className="mt-5 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl dark:text-white">
+            <h1 className="mt-5 font-serif text-3xl leading-tight text-gray-950 sm:text-4xl lg:text-5xl dark:text-white">
               {post.title}
             </h1>
 
             <div className="mt-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f8eee9] text-sm font-semibold text-[#a5452e] dark:bg-[#38251f] dark:text-[#df8064]">
                 {authorInitials}
               </div>
 
@@ -332,7 +332,7 @@ export default function PostPage() {
 
           <section className="mt-10 pb-10">
             <div className="mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="font-serif text-2xl text-gray-950 dark:text-white">
                 Comentários
               </h2>
 

@@ -20,7 +20,7 @@ export default function PostManagementItem({
 			<div className="min-w-0 flex-1">
 				<Link
 					href={`/dashboard/posts/${post.id}`}
-					className="block truncate text-sm font-medium text-gray-900 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-400"
+					className="block truncate text-sm font-medium text-gray-900 hover:text-[#a5452e] dark:text-white dark:hover:text-[#df8064]"
 				>
 					{post.title}
 				</Link>
@@ -38,8 +38,8 @@ export default function PostManagementItem({
 					aria-busy={isUpdating}
 					className={
 						post.published
-							? "rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700 transition-colors hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-green-950/40 dark:text-green-400 dark:hover:bg-green-950/60"
-							: "rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+							? "rounded-md bg-[#f8eee9] px-2.5 py-1 text-xs font-medium text-[#a5452e] transition-colors hover:bg-[#f1dfd7] disabled:cursor-not-allowed disabled:opacity-60 dark:bg-[#38251f] dark:text-[#df8064] dark:hover:bg-[#493027]"
+							: "rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
 					}
 				>
 					{isUpdating ? (

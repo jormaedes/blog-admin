@@ -1,54 +1,21 @@
 "use client";
 
-import { Monitor, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-const themes = [
-	{
-		value: "light",
-		label: "Light",
-		icon: Sun,
-	},
-	{
-		value: "system",
-		label: "System",
-		icon: Monitor,
-	},
-	{
-		value: "dark",
-		label: "Dark",
-		icon: Moon,
-	},
-] as const;
-
 export default function ThemeSwitcher() {
-	const { theme, setTheme } = useTheme();
+	const { resolvedTheme, setTheme } = useTheme();
+	const isDark = resolvedTheme === "dark";
+	const Icon = isDark ? Sun : Moon;
 
 	return (
-		<div className="flex items-center gap-1 rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
-			{themes.map(({ value, label, icon: Icon }) => {
-				const isActive = theme === value;
-
-				return (
-					<button
-						key={value}
-						type="button"
-						onClick={() => setTheme(value)}
-						aria-label={`Tema ${label}`}
-						aria-pressed={isActive}
-						className={`
-              flex h-8 w-8 items-center justify-center rounded-md
-              transition-colors
-              ${isActive
-								? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-white"
-								: "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-							}
-            `}
-					>
-						<Icon size={16} strokeWidth={2} />
-					</button>
-				);
-			})}
-		</div>
+		<button
+			type="button"
+			onClick={() => setTheme(isDark ? "light" : "dark")}
+			aria-label={isDark ? "Ativar tema claro" : "Ativar tema escuro"}
+			className="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 transition-colors hover:bg-gray-100 hover:text-[#a5452e] dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-[#df8064]"
+		>
+			<Icon size={17} strokeWidth={1.8} />
+		</button>
 	);
 }

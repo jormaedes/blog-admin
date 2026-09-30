@@ -11,7 +11,7 @@ export default function RecentCommentItem({
   return (
     <Link
       href={`/dashboard/posts/${comment.post.id}`}
-      className="block rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50"
+      className="block rounded-md p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50"
     >
       <div className="flex items-start gap-3">
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300">
