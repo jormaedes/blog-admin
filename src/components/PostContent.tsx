@@ -6,6 +6,7 @@ export default function PostContent({ content }: PostContentProps) {
   return (
     <article
       className="
+        post-content
         prose
         prose-gray
         max-w-none
