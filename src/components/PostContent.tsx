@@ -26,6 +26,15 @@ export default function PostContent({ content }: PostContentProps) {
         prose-h2:text-2xl
         prose-h2:leading-tight
 
+        dark:prose-h1:text-[#d1d5db];
+        dark:prose-h2:text-[#d1d5db];
+        dark:prose-h3:text-[#d1d5db];
+        dark:prose-h4:text-[#d1d5db];
+        dark:prose-h5:text-[#d1d5db];
+        dark:prose-h6:text-[#d1d5db];
+
+        dark:prose-strong:text-[#d1d5db]
+
         prose-h3:mt-8
         prose-h3:mb-3
         prose-h3:text-xl
