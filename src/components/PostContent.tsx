@@ -34,6 +34,7 @@ export default function PostContent({ content }: PostContentProps) {
         prose-p:my-5
         prose-p:leading-7
         prose-p:text-gray-700
+        dark:prose-p:text-[#d1d5db]
 
         prose-a:font-medium
         prose-a:text-[#a5452e]
